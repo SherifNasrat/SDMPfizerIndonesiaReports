@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE58E643-FC43-4CD9-8FE8-3BC93D6F3A44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SDMIndonesiaReportsDB</RootNamespace>
+    <AssemblyName>SDMIndonesiaReportsDB</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\SDMIndonesiaReports\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\SDMIndonesiaReports\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Country.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CountryPeriod.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerBranch.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerGroup.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerSector.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeLog.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeProfile.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeRecord.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GeographicalArea.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Level.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Period.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Profile.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ProfileAdditionalAccount.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ProfileGeographicalArea.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SalesTeam.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SalesTeamType.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SDMIndonesiaReportsDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SDMIndonesiaReportsDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SDMIndonesiaReportsDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SDMIndonesiaReportsDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SDMIndonesiaReportsDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_BudAndAchByAM_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_BudAndAchbyCountry_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_BudAndAchbyHCR_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_BudAndAchBySM_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_CustomerShareReport_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_FFConfig_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_FFPerformanceByFFConfig_AM_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_FFPerformanceByFFConfig_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_FFPerformanceByFFConfig_SM_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetProfileByPeriods_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_HHCRPerformanceByProduct_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TeamToProduct_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TerritoryBrickbyBrick_Helper_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TerritoryToBrickByArea_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TerritorytoBrickbyBrick_getBricks_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TransactionDetail_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TransactionSummarybyChannel_getSectorsQtyPerRecord_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TransactionSummarybyChannel_Helper_Result.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SystemUser.cs">
+      <DependentUpon>SDMIndonesiaReportsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Model\SDMIndonesiaReportsDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SDMIndonesiaReportsDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\SDMIndonesiaReportsDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SDMIndonesiaReportsDB.edmx</DependentUpon>
+      <LastGenOutput>SDMIndonesiaReportsDB.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model\SDMIndonesiaReportsDB.edmx.diagram">
+      <DependentUpon>SDMIndonesiaReportsDB.edmx</DependentUpon>
+    </None>
+    <None Include="Model\SDMIndonesiaReportsDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SDMIndonesiaReportsDB.edmx</DependentUpon>
+      <LastGenOutput>SDMIndonesiaReportsDB.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

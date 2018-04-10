@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="New" xml:space="preserve">
+    <value>~/App_Themes/icons/Document-new.png</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>~/App_Themes/icons/Back.png</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>~/App_Themes/icons/gtk-cancel.png</value>
+  </data>
+  <data name="CSV" xml:space="preserve">
+    <value>~/App_Themes/icons/icons_CSV16.png</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>~/App_Themes/icons/editdelete.png</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>~/App_Themes/icons/edit.png</value>
+  </data>
+  <data name="Excel" xml:space="preserve">
+    <value>~/App_Themes/icons/icons_Excel.png</value>
+  </data>
+  <data name="ExcelML" xml:space="preserve">
+    <value>~/App_Themes/icons/ms-excel.png</value>
+  </data>
+  <data name="PDF" xml:space="preserve">
+    <value>~/App_Themes/img/icons_PDF.png</value>
+  </data>
+  <data name="PerformSearch" xml:space="preserve">
+    <value>~/App_Themes/icons/gnome-searchtool.png</value>
+  </data>
+  <data name="ResetSearchCriteria" xml:space="preserve">
+    <value>~/App_Themes/icons/edit-undo.png</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>~/App_Themes/icons/document-save.png</value>
+  </data>
+  <data name="SaveAndAddNew" xml:space="preserve">
+    <value>~/App_Themes/icons/document-save-as.png</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>~/App_Themes/icons/gnome-searchtool.png</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>~/App_Themes/icons/ShowAll16.png</value>
+  </data>
+  <data name="TwentyRows" xml:space="preserve">
+    <value>~/App_Themes/img/icons_PDF.gif</value>
+  </data>
+  <data name="Word" xml:space="preserve">
+    <value>~/App_Themes/icons/icons_Word16.png</value>
+  </data>
+  <data name="LoadingPanel" xml:space="preserve">
+    <value>~/App_Themes/icons/WebResource.gif</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>~/App_Themes/icons/warning.png</value>
+  </data>
+  <data name="Successfully" xml:space="preserve">
+    <value>~/App_Themes/icons/successfully.png</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>~/App_Themes/icons/Copy.png</value>
+  </data>
+  <data name="Execute" xml:space="preserve">
+    <value>~/App_Themes/icons/Execute2.png</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>~/App_Themes/icons/Upload.png</value>
+  </data>
+  <data name="Commit" xml:space="preserve">
+    <value>~/App_Themes/icons/Copy of successfully.png</value>
+  </data>
+  <data name="Merge" xml:space="preserve">
+    <value>~/App_Themes/icons/Merge.png</value>
+  </data>
+  <data name="Commit_noGeoAlloc" xml:space="preserve">
+    <value>~/App_Themes/icons/commit_noGeoAlloc.png</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>~/App_Themes/icons/LoadingPnl.gif</value>
+  </data>
+  <data name="True1" xml:space="preserve">
+    <value>~/App_Themes/icons/ok1.png</value>
+  </data>
+  <data name="True2" xml:space="preserve">
+    <value>~/App_Themes/icons/ok2.png</value>
+  </data>
+  <data name="False1" xml:space="preserve">
+    <value>~/App_Themes/icons/False1.png</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>~/App_Themes/icons/Back1.png</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>~/App_Themes/icons/Forward1.png</value>
+  </data>
+  <data name="Execute1" xml:space="preserve">
+    <value>~/App_Themes/icons/Execute1.png</value>
+  </data>
+  <data name="False" xml:space="preserve">
+    <value>~/App_Themes/icons/False.png</value>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>~/App_Themes/icons/True.png</value>
+  </data>
+  <data name="spacer" xml:space="preserve">
+    <value>~/App_Themes/img/spacer.gif</value>
+  </data>
+  <data name="report" xml:space="preserve">
+    <value>~/App_Themes/icons/execute7.png</value>
+  </data>
+  <data name="ClearSearch" xml:space="preserve">
+    <value>~/App_Themes/icons/clear.png</value>
+  </data>
+  <data name="CancelSalesOnly" xml:space="preserve">
+    <value>~/App_Themes/icons/CancelSalesOnly.png</value>
+  </data>
+  <data name="DeleteSalesOnly" xml:space="preserve">
+    <value>~/App_Themes/icons/DeleteSalesOnly.png</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>~/App_Themes/icons/msgerror.png</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>~/App_Themes/icons/Refresh.png</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>~/App_Themes/icons/Transfer.png</value>
+  </data>
+  <data name="Rollback" xml:space="preserve">
+    <value>~/App_Themes/icons/Rollback.png</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>~/App_Themes/icons/Submit.png</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>~/App_Themes/icons/message.png</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>~/App_Themes/icons/Review.gif</value>
+  </data>
+  <data name="CancelUpload" xml:space="preserve">
+    <value>~/App_Themes/icons/CancelUpload2.png</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>~/App_Themes/icons/Update.png</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>~/App_Themes/icons/Reject.png</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>~/App_Themes/icons/Update.png</value>
+  </data>
+  <data name="SubmitAll" xml:space="preserve">
+    <value>~/App_Themes/icons/SubmitAll.png</value>
+  </data>
+  <data name="EndAssignments" xml:space="preserve">
+    <value>~/App_Themes/icons/EndAssignments.png</value>
+  </data>
+  <data name="blank" xml:space="preserve">
+    <value>~/App_Themes/img/blank.gif</value>
+  </data>
+  <data name="Uploading" xml:space="preserve">
+    <value>~/App_Themes/img/loading2.png</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>~/App_Themes/icons/Clear.png</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>~/App_Themes/icons/paste.png</value>
+  </data>
+  <data name="CancelAll" xml:space="preserve">
+    <value>~/App_Themes/icons/gtk-cancel.png</value>
+  </data>
+</root>

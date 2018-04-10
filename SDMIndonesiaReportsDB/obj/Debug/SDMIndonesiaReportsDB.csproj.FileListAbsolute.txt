@@ -1,0 +1,10 @@
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\bin\Debug\SDMIndonesiaReportsDB.dll.config
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\bin\Debug\SDMIndonesiaReportsDB.dll
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\bin\Debug\SDMIndonesiaReportsDB.pdb
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\bin\Debug\EntityFramework.dll
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\bin\Debug\EntityFramework.SqlServer.dll
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\bin\Debug\EntityFramework.xml
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\bin\Debug\EntityFramework.SqlServer.xml
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\obj\Debug\SDMIndonesiaReportsDB.csprojResolveAssemblyReference.cache
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\obj\Debug\SDMIndonesiaReportsDB.dll
+D:\Workspaces\SDMIndonesiaReports\SDMIndonesiaReportsDB\obj\Debug\SDMIndonesiaReportsDB.pdb

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0"?>
+<configuration>
+	<appSettings>
+		<add key="ASystems:AllowedRoles" value="" />
+	</appSettings>
+	<connectionStrings>
+		<!-- LDAP URL: http://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol -->
+		<add name="LDAPConnection" connectionString="LDAP://{domain}/{root}" />
+	</connectionStrings>
+	<system.web>
+		<membership>
+			<providers>
+				<add name="DirectoryServicesMembershipProvider"
+					 type="ASystems.DirectoryServicesProviders.DirectoryServicesMembershipProvider, ASystems.DirectoryServicesProviders"
+					 connectionStringName="LDAPConnection"
+					 enableSearchMethods="true"
+					 attributeMapUsername="sAMAccountName"
+					 cache="15"
+					 allowedRoles="ASystems:AllowedRoles" />
+			</providers>
+		</membership>
+		<roleManager enabled="true">
+			<providers>
+				<add name="DirectoryServicesRoleProvider"
+					 type="ASystems.DirectoryServicesProviders.DirectoryServicesRoleProvider, ASystems.DirectoryServicesProviders"
+					 connectionStringName="LDAPConnection"
+					 cache="15" />
+			</providers>
+		</roleManager>
+	</system.web>
+</configuration>

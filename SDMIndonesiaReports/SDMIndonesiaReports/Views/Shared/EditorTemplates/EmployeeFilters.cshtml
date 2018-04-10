@@ -1,0 +1,16 @@
+﻿@* Call Review Filter *@
+@using Kendo.Mvc.UI
+<div class="pull-left">
+    @(Html.Kendo().DropDownList()
+                              .Name("FromPeriod")
+                              .BindTo(ViewBag.Periods as SelectList).Events(e => e.Change("periodChange")).Value(ViewBag.FromPeriod as string)
+                              
+                              )
+
+    @(Html.Kendo().DropDownList()
+                              .Name("ToPeriod")
+                              .BindTo(ViewBag.Periods as SelectList).Events(e => e.Change("periodChange")).Value(ViewBag.ToPeriod as string)
+                              
+                              )
+</div>
+

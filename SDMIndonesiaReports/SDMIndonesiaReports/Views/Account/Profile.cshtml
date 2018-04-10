@@ -1,0 +1,242 @@
+﻿@model SDMIndonesiaReportsDB.Model.SystemUser
+@using SDMIndonesiaReports.Shared;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "My Profile";
+    string personalInfoActive = "", changePictureActive = "", changePasswordActive = "";
+    var activeTabName = SessionContainer.ProfileActiveTab;
+    SessionContainer.ProfileActiveTab = null;
+    if (activeTabName == "changePassword")
+    {
+        changePasswordActive = "active";
+    }
+    else if (activeTabName == "changePicture")
+    {
+        changePictureActive = "active";
+    }
+    else if (activeTabName == "personalInfo")
+    {
+        personalInfoActive = "active";
+    }
+    else
+    {
+        personalInfoActive = "active";
+    }
+    bool enableMultiLingual = bool.Parse(SDMIndonesiaReports.Shared.SessionContainer.MultiLingual.ToString());
+}
+
+<h2>Profile</h2>
+<script src="@Url.Content("~/Scripts/ValidateDataForms.js")"></script>
+<link href="@Url.Content("~/assets/css/hint.min.css")" rel="stylesheet" type="text/css" />
+<div class="tab-pane row-fluid profile-account active" id="tab_1_3">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="span3">
+                <ul class="ver-inline-menu tabbable margin-bottom-10">
+                    <li class="@personalInfoActive">
+                        <a data-toggle="tab" href="#tab_1-1">
+                            <i class="icon-user"></i>
+                            @Resources.Account_Resource.PersonalInfo
+                        </a>
+                        <span class="after"></span>
+                    </li>
+                    <li class="@changePictureActive"><a data-toggle="tab" href="#tab_2-2"><i class="icon-picture"></i> @Resources.Account_Resource.ChangeAvatar</a></li>
+                    <li class="@changePasswordActive"><a data-toggle="tab" href="#tab_3-3"><i class="icon-lock"></i> @Resources.Account_Resource.ChangePassword</a></li>
+                    @*<li class=""><a data-toggle="tab" href="#tab_4-4"><i class="icon-eye-open"></i> Privacity Settings</a></li>*@
+                </ul>
+            </div>
+            <div class="span9">
+                <div class="tab-content">
+                    <div id="tab_1-1" class="tab-pane @personalInfoActive">
+                        <div style="height: auto;" id="accordion1-1" class="accordion in collapse">
+
+                            @using (Html.BeginForm("ChangePersonalInfo", "Account", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(u => u.UserID)
+                                @Html.ValidationSummary(true, "", new { @style = "color:red" })
+                                <h3 class="form-title"> @Resources.Account_Resource.PersonalInfo</h3>
+                                <div class="control-group">
+                                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                                    <label class="control-label" for="Email"> @Resources.Account_Resource.EmailAddrass</label>
+                                    <div class="controls">
+                                        <div class="input-icon left">
+                                            <i class="icon-envelope"></i>
+                                            <div class="m-wrap placeholder-no-fix">
+                                                @*@Html.Password("currentPassword", null, new { @class = "m-wrap placeholder-no-fix", @placeholder = "Current password" })*@
+                                                @*@Html.ValidationMessage("tempPassword", "The temporary password is required");*@
+                                                @*@Html.ValidationMessageFor(U => U.Email)*@
+                                                <a href="javascript:void(0)" class="hint--top hint--error" data-hint="ex: example@example.com">
+                                                    @Html.EditorFor(model => model.Email)
+                                                </a>
+                                                @* @Html.EditorFor(m => m.Email)*@
+                                                @Html.ValidationMessageFor(m => m.Email)
+                                            </div>
+                                            <!--<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                                    <label class="control-label" for="FullName">@Resources.Account_Resource.FullName</label>
+                                    <div class="controls">
+                                        <div class="input-icon left">
+                                            <i class="icon-user"></i>
+                                            <div class="m-wrap placeholder-no-fix">
+                                                @*@Html.Password("currentPassword", null, new { @class = "m-wrap placeholder-no-fix", @placeholder = "Current password" })*@
+                                                @*@Html.ValidationMessage("tempPassword", "The temporary password is required");*@
+                                                @*@Html.ValidationMessageFor(U => U.Email)*@
+                                                <a href="javascript:void(0)" class="hint--top hint--error" data-hint="at least 6 characters, i.e. Joe Smith">
+                                                    @Html.EditorFor(model => model.FullName)
+                                                </a>
+                                                @*@Html.EditorFor(m => m.FullName)*@
+                                                @Html.ValidationMessageFor(m => m.FullName)
+                                            </div>
+                                            <!--<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn green pull-left" onclick="return checkValidation();">@Resources.Account_Resource.UpdateMyData <i class="icon-user m-icon-white"></i></button>
+                                    <a href='@Url.Action("Index", "Home")' class="btn black button-submit">@Resources.Account_Resource.Cancel</a>
+                                </div>
+                            }
+                            <!--    <form action="#">
+                                    <label class="control-label">First Name</label>
+                                    <input type="text" placeholder="John" class="m-wrap span8">
+                                    <label class="control-label">Last Name</label>
+                                    <input type="text" placeholder="Doe" class="m-wrap span8">
+                                    <label class="control-label">Mobile Number</label>
+                                    <input type="text" placeholder="+1 646 580 DEMO (6284)" class="m-wrap span8">
+                                    <label class="control-label">Interests</label>
+                                    <input type="text" placeholder="Design, Web etc." class="m-wrap span8">
+                                    <label class="control-label">Occupation</label>
+                                    <input type="text" placeholder="Web Developer" class="m-wrap span8">
+                                    <label class="control-label">Counrty</label>
+                                    <div class="controls">
+                                        <input type="text" class="span8 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;US&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]"><ul class="typeahead dropdown-menu" style="top: 454px; left: 0px; display: none;"><li data-value="Idaho" class="active"><a href="#"><strong>I</strong>daho</a></li><li data-value="Illinois"><a href="#"><strong>I</strong>ll<strong>i</strong>no<strong>i</strong>s</a></li><li data-value="Indiana"><a href="#"><strong>I</strong>nd<strong>i</strong>ana</a></li><li data-value="Iowa"><a href="#"><strong>I</strong>owa</a></li></ul>
+                                        <p class="help-block"><span class="muted">Start typing to auto complete!. E.g: US</span></p>
+                                    </div>
+                                    <label class="control-label">About</label>
+                                    <textarea class="span8 m-wrap" rows="3"></textarea>
+                                    <label class="control-label">Website Url</label>
+                                    <input type="text" placeholder="http://www.mywebsite.com" class="m-wrap span8">
+                                    <div class="submit-btn">
+                                        <a href="#" class="btn green">Save Changes</a>
+                                        <a href="#" class="btn">Cancel</a>
+                                    </div>
+                                </form> -->
+                        </div>
+                    </div>
+                    <div id="tab_2-2" class="tab-pane @changePictureActive">
+                        <div style="height: auto;" id="accordion2-2" class="accordion collapse in">
+                            @using (Html.BeginForm("UploadProfilePhoto", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                            {
+                                @Html.HiddenFor(m => m.UserID)
+                                <div class="controls">
+                                    <div class="thumbnail" style="width: 291px; height: 170px;">
+                                        <img src='@Url.Action("ProfileImage", "Account", new {id=Model.UserID})' alt="no image" style="max-height: 170px; max-width: 291px;">
+                                    </div>
+                                </div>
+                                <div class="space10"></div>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="input-append">
+                                        <span class="btn btn-file">
+                                            <span class="fileupload-new">@Resources.Account_Resource.SelectImageFile</span>
+                                            <br /><br />
+                                            <input type="file" accept='image/*' name="photo">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn green pull-left">@Resources.Account_Resource.UploadPhoto <i class="icon-upload m-icon-white"></i></button>
+                                    <a href='@Url.Action("Index", "Home")' class="btn black button-submit">@Resources.Account_Resource.Cancel</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div id="tab_3-3" class="tab-pane @changePasswordActive">
+                        <div style="height: auto;" id="accordion3-3" class="accordion in collapse">
+                            @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(model => model.UserID)
+                                @Html.ValidationSummary(true, "", new { @style = "color:red" })
+		<!--<form class="form-vertical login-form" action="index.html">-->
+                                <h3 class="form-title">@Resources.Account_Resource.ChangeYourPassword</h3>
+                                <div class="alert alert-error hide">
+                                    <button class="close" data-dismiss="alert"></button>
+                                    <span>@Resources.Account_Resource.EnterTheTemporaryPassword</span>
+                                </div>
+                                <div class="control-group">
+                                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                                    <label class="control-label" for="currentPassword">@Resources.Account_Resource.CurrentPassword</label>
+                                    <div class="controls">
+                                        <div class="input-icon left">
+                                            <i class="icon-lock"></i>
+                                            <div class="m-wrap placeholder-no-fix">
+                                                @Html.Password("currentPassword", null, new { @class = "m-wrap placeholder-no-fix", @placeholder = @Resources.Account_Resource.CurrentPassword })
+                                                @*@Html.ValidationMessage("tempPassword", "The temporary password is required");*@
+                                                @*@Html.ValidationMessageFor(U => U.Email)*@
+                                            </div>
+                                            <!--<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="newPassword">@Resources.Account_Resource.NewPasswordLabel</label>
+                                    <div class="controls">
+                                        <div class="input-icon left">
+                                            <i class="icon-lock"></i>
+                                            @Html.Password("newPassword", null, new { @class = "m-wrap placeholder-no-fix", @placeholder = @Resources.Account_Resource.NewPasswordLabel })
+                                            @Html.ValidationMessageFor(U => U.Password)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="confirmation">@Resources.Account_Resource.ConfirmNewPassword</label>
+                                    <div class="controls">
+                                        <div class="input-icon left">
+                                            <i class="icon-lock"></i>
+                                            @Html.Password("confirmation", null, new { @class = "m-wrap placeholder-no-fix", @placeholder = @Resources.Account_Resource.ConfirmYourPassword })
+                                            @Html.ValidationMessageFor(U => U.Password)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    @*<label class="checkbox">
+                                        <input type="checkbox" name="remember" value="1"/> Remember me
+                                        </label>*@
+                                    <button type="submit" class="btn green pull-left">
+                                        @Resources.Account_Resource.ChangePassword <i class="m-icon-swapright m-icon-white"></i>
+                                    </button>
+                                    @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn black button-submit" })
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script lang="javascript">
+                  function checkValidation() {
+                      var IsValid = true;
+                      var ErroMsg = "";
+                      if ($("#FullName").val().length < 6) {
+                          ErroMsg = "Full name should be at least 6 characters.";
+                          IsValid = false;
+                      }
+                      if (!IsValid) {
+                          document.getElementById("ajaxErrorArea").style.display = document.getElementById("errorAreaBody").style.display = 'block';
+                          document.getElementById("errorAreaBody").innerHTML = ErroMsg;
+                          window.scrollTo(0, 0);
+                      }
+                      else {
+                          document.getElementById("errorAreaBody").innerHTML = "";
+                          document.getElementById("errorAreaBody").style.display = document.getElementById("errorAreaBody").style.display = 'none';
+                      }
+                      return IsValid;
+                  }
+
+            </script>
+            <!--end span9-->
+        </div>
+    </div>
+</div>

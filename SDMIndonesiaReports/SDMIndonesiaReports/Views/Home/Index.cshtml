@@ -1,0 +1,9 @@
+﻿@using SDMIndonesiaReports.Shared
+@using Resources
+@{
+    ViewBag.Title = "Home";
+    SessionContainer.BreadCrumbText = new List<string>();
+    SessionContainer.BreadCrumbLinks = new List<string>();
+  //  SessionContainer.BreadCrumbText.Add(Pages_Resources.home);
+    SessionContainer.BreadCrumbLinks.Add(Url.Action("Index", "Home"));
+}

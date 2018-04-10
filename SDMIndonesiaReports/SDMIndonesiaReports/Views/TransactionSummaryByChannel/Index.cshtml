@@ -1,0 +1,539 @@
+﻿@using SDMIndonesiaReports.App_GlobalResources;
+@using Resources;
+@using SDMIndonesiaReports.Shared;
+
+<script type="text/javascript">
+
+    $(function () {
+        InitializeGrid();
+    });
+</script>
+
+@{
+    ViewBag.Title = Resources.Pages_Resources.transactionsummarybychannel;
+    string columnHeaderStyle = "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;";
+    var classDiv = (SDMIndonesiaReports.Shared.CultureHelper.IsRighToLeft()) ? "k-rtl" : "portlet-body";
+    SessionContainer.BreadCrumbText = new List<string>();
+    SessionContainer.BreadCrumbLinks = new List<string>();
+    SessionContainer.BreadCrumbText.Add(Pages_Resources.transactionsummarybychannel);
+    SessionContainer.BreadCrumbLinks.Add(Url.Action("Index", "TransactionSummaryByChannel"));
+    int headerWidth = 300;
+}
+
+<div class="row-fluid">
+    <div class="span6 responsive" data-tablet="span12 fix-offset" data-desktop="span6" style="width: 100%;">
+        <div class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption"><i class="icon-user"></i>@Resources.Pages_Resources.transactionsummarybychannel</div>
+            </div>
+            <div class="clearfix">
+                <div class="pull-right">
+
+
+
+                    @(Html.Kendo().DropDownList()
+                              .Name("Country")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .DataSource(source => source.Read(read =>
+                              {
+                                  read.Action("Countries_Read", "TransactionSummaryByChannel");
+                              })
+                              .ServerFiltering(true)
+                              )
+                                              //.Events(e => e.Change("reloadGrid"))
+                              .OptionLabel("Select Country")
+
+
+                    )
+
+                    @(Html.Kendo().DropDownList()
+                                  .Name("FromPeriods")
+                                  .DataTextField("Text")
+                                  .DataValueField("Value")
+                                  .DataSource(source => source.Read(read =>
+                                  {
+                                      read.Action("Periods_Read", "TransactionSummaryByChannel").Data("getCountry");
+                                  })
+                                  .ServerFiltering(true)
+                                  )
+                                                                  //.Events(e => { e.Change("reloadGrid"); })
+                                  .CascadeFrom("Country")
+                                          .OptionLabel(new { Text = "Select From Period", Value = (int?)null })
+
+                    )
+                    @(Html.Kendo().DropDownList()
+                                .Name("ToPeriods")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .DataSource(source => source.Read(read =>
+                                {
+                                    read.Action("Periods_Read", "TransactionSummaryByChannel").Data("getCountry");
+                                })
+                                .ServerFiltering(true)
+                                )
+                                                       // .Events(e => { e.Change("reloadGrid"); })
+                                .CascadeFrom("Country")
+                                        .OptionLabel(new { Text = "Select To Period", Value = (int?)null })
+
+                    )
+                    <a id="kendoIconButton" class="btn blue" style="height:14px; width:auto;margin-top:1px; margin-right:10px; text-align:center; line-height:14px">@Global_Label_Resource.viewreport</a>
+
+                </div>
+
+
+            </div>
+
+            <div id="GridContainer" class="@classDiv">
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@section scripts{
+
+
+
+
+    <script type="text/javascript">
+
+    var grid;
+    var viewModel;
+    function InitializeGrid() {
+        //add the #example again
+        var div = document.getElementById('GridContainer');
+        var ele = document.createElement("div");
+        ele.setAttribute("id", 'example');
+        div.appendChild(ele);
+        //add the #grid
+        var div = document.getElementById('example');
+        var ele = document.createElement("div");
+        ele.setAttribute("id", 'grid');
+        div.appendChild(ele);
+
+        $("#grid").kendoGrid({
+
+            groupable: true,
+            sortable: true,
+            toolbar: kendo.template($("#exportToolbar").html()),
+            filterable: true,
+            autoBinding:false,
+            scrollable:{scrollable:true,
+               height:"auto"
+            },
+            pageable: {
+                refresh: true,
+                input: true,
+                numeric: true,
+                pageSizes: true,
+
+            },
+            columns: [
+                {
+                    field: "",
+                    title: "Province",
+                    width: @headerWidth,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+
+                    }
+                },
+                    {
+                        field: "",
+                        title: "City",
+                        width: @headerWidth,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                        }
+                    },
+                     {
+                         field: "",
+                         title: "Brick",
+                         width: @headerWidth,
+                         headerAttributes: {
+                             "class": "table-header-cell",
+                             style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                         }
+                     },
+                      {
+                          field: "",
+                          title: "ProductGroup",
+                          width: @headerWidth,
+                          headerAttributes: {
+                              "class": "table-header-cell",
+                              style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                          }
+                      },
+                       {
+                           field: "",
+                           title: "SM",
+                           width: @headerWidth,
+                           headerAttributes: {
+                               "class": "table-header-cell",
+                               style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                           }
+                       },
+                        {
+                            field: "",
+                            title: "AM",
+                            width: @headerWidth,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                            }
+                        },
+                         {
+                             field: "",
+                             title: "HCR",
+                             width: @headerWidth,
+                             headerAttributes: {
+                                 "class": "table-header-cell",
+                                 style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                             }
+                         },
+                          {
+                              field: "",
+                              title: "Profile",
+                              width: @headerWidth,
+                              headerAttributes: {
+                                  "class": "table-header-cell",
+                                  style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                              }
+                          },
+                           {
+                               field: "",
+                               title: "Product",
+                               width: @headerWidth,
+                               headerAttributes: {
+                                   "class": "table-header-cell",
+                                   style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                               }
+                           },{
+                               field: "", //Total Qty
+                               title: "Total",
+                               width: @headerWidth,
+                               headerAttributes: {
+                                   "class": "table-header-cell",
+                                   style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                               }
+                           }
+                        ,
+                        {
+                            field: "", //VALUE Total
+                            title: "VALUE Total",
+                            width: @headerWidth,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                            }
+                        }
+
+
+                ]
+        });
+        $(".k-grid-content").css("height","20px");
+        };
+        function CreateGridDiv() {
+            //add the #example again
+            var div = document.getElementById('GridContainer');
+            var ele = document.createElement("div");
+            ele.setAttribute("id", 'example');
+            ele.setAttribute("class", "k-content");
+            div.appendChild(ele);
+            //add the #grid
+            var div = document.getElementById('example');
+            var ele = document.createElement("table");
+            ele.setAttribute("id", 'grid');
+            ele.setAttribute("data-bind", "source: gridRows");
+            div.appendChild(ele);
+        };
+
+
+        function reloadGrid() {
+            //remove the div #example
+           
+            kendo.ui.progress($("#grid"), true);
+            disableInput();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("TransactionSummaryByChannel_Read")',
+            data: { countryID: $("#Country").val(), fromPeriodID: $("#FromPeriods").val(), toPeriodID: $("#ToPeriods").val() },
+            cache: false,
+            success: function (result) {
+                $("#example").remove();
+                kendo.ui.progress($("#grid"), false);
+               
+                if (result.rowCount > 0 && result.columnCount > 0) {
+                    CreateGridDiv();
+                    var rows = [];
+                    var newArr = [];
+                    while (result.dataArray.length)
+                        newArr.push(result.dataArray.splice(0, result.columnCount));
+                    for (var i = 0; i < result.rowCount; i++) {
+                        entryArray = [];
+                        for (var j = 0; j < result.columnCount; j++) {
+                            entryArray.push(newArr[i][j]);
+
+                        }
+                        rows.push(kendo.observable({
+                            entries: entryArray
+                        }));
+                    }
+                    var viewModel = kendo.observable({
+                        gridRows: rows
+                    });
+                    var columns = [];
+                    columns.push({
+                        field: "entries[0]",
+                        title: "Province",
+                        width: @headerWidth,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+
+                        }
+                    },
+                {
+                    field: "entries[1]",
+                    title: "City",
+                    width: @headerWidth,
+                    headerAttributes: {
+                        "class": "table-header-cell",
+                        style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                    }
+                },
+                 {
+                     field: "entries[2]",
+                     title: "Brick",
+                     width: @headerWidth,
+                     headerAttributes: {
+                         "class": "table-header-cell",
+                         style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                     }
+                 },
+                  {
+                      field: "entries[3]",
+                      title: "ProductGroup",
+                      width: @headerWidth,
+                      headerAttributes: {
+                          "class": "table-header-cell",
+                          style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                      }
+                  },
+                   {
+                       field: "entries[4]",
+                       title: "SM",
+                       width: @headerWidth,
+                       headerAttributes: {
+                           "class": "table-header-cell",
+                           style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                       }
+                   },
+                    {
+                        field: "entries[5]",
+                        title: "AM",
+                        width: @headerWidth,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                        }
+                    },
+                     {
+                         field: "entries[6]",
+                         title: "HCR",
+                         width: @headerWidth,
+                         headerAttributes: {
+                             "class": "table-header-cell",
+                             style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                         }
+                     },
+                      {
+                          field: "entries[7]",
+                          title: "Profile",
+                          width: @headerWidth,
+                          headerAttributes: {
+                              "class": "table-header-cell",
+                              style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                          }
+                      },
+                       {
+                           field: "entries[8]",
+                           title: "Product",
+                           width: @headerWidth,
+                           headerAttributes: {
+                               "class": "table-header-cell",
+                               style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                           }
+                       });
+                    //change to -2 for the amount column
+                    for (var i = 9; i < result.columnCount-2; i++) {
+                        var entryIndex = "entries[" + i + "]";
+
+                        columns.push({
+                            field: entryIndex,
+                            title: result.sectorsNames[i - 9],
+                            width: @headerWidth,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                            }
+                        });
+                    }
+                    //adding the total Qty and Amount columns
+                    columns.push(
+                        {
+                            field: "entries[" + (result.columnCount - 2) + "]", //Total Qty
+                            title: "Total",
+                            width: @headerWidth,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                            }
+                        }
+                        ,
+                        {
+                            field: "entries[" + (result.columnCount - 1) + "]", //VALUE Total
+                            title: "VALUE Total",
+                            width: @headerWidth,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                            }
+                        }
+
+                        );
+                    var configuration = {
+                        filterable: true,
+                        resizable: true,
+                        dataSource: { pageSize: 10 },
+                        sortable: true,
+                        groupable: true,
+                        columnMenu: true,
+                        autoBinding:false,
+                        height:'auto',
+                        dataBound: onDataBound,
+                        toolbar: kendo.template($("#exportToolbar").html()),
+                        scrollable: {
+                            scrollable: true,
+                            height: 'auto'
+
+                        },
+
+                        pageable: {
+                            refresh: true,
+                            input: true,
+                            numeric: true,
+                            pageSizes: true,
+                            buttonCount: 5
+                        },
+                        columns: columns
+                    };
+
+                    enableInput();
+                    grid = $("#grid").kendoGrid(configuration);
+                    kendo.bind($('#example'), viewModel);
+
+                }
+                else
+                {
+                    enableInput();
+                    InitializeGrid();
+                }
+
+
+
+            },
+            error: function (ex) {
+                alert("error");
+            }
+
+        });
+
+    }
+        function onDataBound(e) {
+            $(".k-grid-content").removeAttr("style");
+        var grid = $('#grid').data('kendoGrid');
+        var requestObject = (new kendo.data.transports["aspnetmvc-server"]({ prefix: "" }))
+      .options.parameterMap({
+          page: grid.dataSource.page(),
+          sort: grid.dataSource.sort(),
+          filter: grid.dataSource.filter(),
+          take: grid.dataSource.take(),
+          countryID: $("#Country").val(),
+          fromPeriodID: $("#FromPeriods").val(),
+          toPeriodID: $("#ToPeriods").val()
+      });
+        //var gridElement = e.sender.wrapper;
+        //var dataArea = gridElement.children(".k-grid-content");
+        //var diff = dataArea[0].scrollHeight - dataArea[0].clientHeight+15;
+        //gridElement.height(gridElement.height() + diff);
+        //e.sender.resize();
+
+        $("[dataexport='yes'],[data-export='yes']").each(function () {
+            // Get its 'href' attribute - the URL where it would navigate to
+            var href = $(this).attr('href');
+            // Update the 'page' parameter with the grid's current page
+            href = href.replace(/page=([^&]*)/, 'page=' + requestObject.page || '~');
+
+            // Update the 'sort' parameter with the grid's current sort descriptor
+            href = href.replace(/sort=([^&]*)/, 'sort=' + requestObject.sort || '~');
+
+            // Update the 'pageSize' parameter with the grid's current pageSize
+            href = href.replace(/pageSize=([^&]*)/, 'pageSize=' + grid.dataSource._pageSize);
+
+            //update filter descriptor with the filters applied
+            href = href.replace(/filter=([^&]*)/, 'filter=' + (requestObject.filter || '~'));
+
+            href = href.replace(/countryID=([^&]*)/, 'countryID=' + requestObject.countryID || '~');
+
+            href = href.replace(/fromPeriodID=([^&]*)/, 'fromPeriodID=' + requestObject.fromPeriodID || '~');
+
+            href = href.replace(/toPeriodID=([^&]*)/, 'toPeriodID=' + requestObject.toPeriodID || '~');
+            // Update the 'href' attribute
+            $(this).attr('href', href);
+
+        })
+    };
+    function getCountry() {
+        return {
+            countryID: $("#Country").val()
+
+        };
+    };
+    function disableInput()
+    {
+        $("#Country").data("kendoDropDownList").enable(false);
+
+        $("#FromPeriods").data("kendoDropDownList").enable(false);
+
+        $("#ToPeriods").data("kendoDropDownList").enable(false);
+    }
+    function enableInput() {
+        $("#Country").data("kendoDropDownList").enable(true);
+         
+        $("#FromPeriods").data("kendoDropDownList").enable(true);
+           
+        $("#ToPeriods").data("kendoDropDownList").enable(true);
+    
+    }
+    $("#kendoIconButton").click(function () {
+        //$("#kendoIconButton").blur();
+        reloadGrid();
+    });
+    </script>
+    <script type="text/x-kendo-template" id="exportToolbar">
+        <div class="toolbar">
+            <div>
+                <a class="k-button" data-export="yes" href="@Url.Action("ExportXls", "TransactionSummaryByChannel", new { filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~", toPeriodID = "~" })"><span class='k-icon k-i-excel'></span> Export to Excel</a>
+                <a class="k-button" data-export="yes" href="@Url.Action("ExportPdf", "TransactionSummaryByChannel", new { filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~", toPeriodID = "~" })"><span class='k-icon k-i-pdf'></span> Export to PDF</a>
+
+            </div>
+        </div>
+    </script>
+
+}

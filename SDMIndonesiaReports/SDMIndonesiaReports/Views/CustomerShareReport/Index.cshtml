@@ -1,0 +1,316 @@
+﻿@using SDMIndonesiaReports.App_GlobalResources;
+@using Resources;
+@using SDMIndonesiaReports.Shared;
+@model SDMIndonesiaReports.Models.CustomModels.CustomerShareReportVM
+
+@{
+    ViewBag.Title = Resources.Pages_Resources.customersharereport;
+    var classDiv = (SDMIndonesiaReports.Shared.CultureHelper.IsRighToLeft()) ? "k-rtl" : "portlet-body";
+    string columnHeaderStyle = "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;text-align: center;";
+    SessionContainer.BreadCrumbText = new List<string>();
+    SessionContainer.BreadCrumbLinks = new List<string>();
+    SessionContainer.BreadCrumbText.Add(Pages_Resources.customersharereport);
+    SessionContainer.BreadCrumbLinks.Add(Url.Action("Index", "CustomerShareReport"));
+}
+@*<style id="Grid_filter">
+        .k-grid    .k-header  .k-link {
+            width:105px;
+            overflow-wrap:normal;
+            overflow:visible;
+       white-space: normal;
+
+    }
+
+    .k-grid  .k-grid-header  .k-header {
+        white-space: normal;
+    }
+    </style>*@
+<script type="text/javascript">
+
+    $(function () {
+    
+        $(".k-grid-content").css("height", "20px");
+    });
+</script>
+<div class="row-fluid">
+    <div class="span6 responsive" data-tablet="span12 fix-offset" data-desktop="span6" style="width: 100%;">
+        <div class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption"><i class="icon-user"></i>@Resources.Pages_Resources.customersharereport</div>
+            </div>
+            <div class="clearfix">
+                <div class="pull-right">
+
+
+
+                    @(Html.Kendo().DropDownList()
+                              .Name("Country")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .DataSource(source => source.Read(read =>
+                              {
+                                  read.Action("Countries_Read", "CustomerShareReport");
+                              })
+                              .ServerFiltering(true)
+                              )
+                              .Events(e => e.Change("reloadProfiles"))
+                              .OptionLabel("Select Country")
+
+
+                    )
+                    <div class="pull-right">
+                        <a id="kendoIconButton" class="btn blue" style="height:14px; width:auto;margin-top:1px; margin-right:10px; text-align:center; line-height:14px">@Global_Label_Resource.viewreport</a>
+
+                    </div>
+                    <div class="pull-right" style="margin-left:3px; margin-right:3px; height:14px;">
+                        @(Html.Kendo().MultiSelect()
+                                .Name("Profiles")
+                                .AutoClose(false)
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .Filter(FilterType.StartsWith)
+
+                                .DataSource(source => source.Read(read =>
+                              {
+                                  read.Action("Profiles_Read", "CustomerShareReport").Data("getCountryandPeriods");
+                              })
+                               .ServerFiltering(false)
+                              )
+                                //.Events(e => { e.Change("reloadGrid"); })
+                              .Placeholder("Select Profiles")
+                              .HighlightFirst(true)
+                              .HtmlAttributes(new { style = "width:200px" })
+
+                        )
+
+                    </div>
+
+                    @(Html.Kendo().DropDownList()
+                                  .Name("FromPeriods")
+                                  .DataTextField("Text")
+                                  .DataValueField("Value")
+                                  .DataSource(source => source.Read(read =>
+                                  {
+                                      read.Action("Periods_Read", "CustomerShareReport").Data("getCountry");
+                                  })
+                                  .ServerFiltering(true)
+                                  )
+                                  //.Events(e => { e.Change("reloadAll"); })
+                                  .CascadeFrom("Country")
+                                          .OptionLabel(new { Text = "Select From Period", Value = (int?)null })
+
+                    )
+                    @(Html.Kendo().DropDownList()
+                                .Name("ToPeriods")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .DataSource(source => source.Read(read =>
+                                {
+                                    read.Action("Periods_Read", "CustomerShareReport").Data("getCountry");
+                                })
+                                .ServerFiltering(true)
+                                )
+                                //.Events(e => { e.Change("reloadAll"); })
+                                .CascadeFrom("Country")
+                                        .OptionLabel(new { Text = "Select To Period", Value = (int?)null })
+
+                    )
+                </div>
+
+
+
+            </div>
+            <div class="@classDiv" style:"grid_filter">
+                @(Html.Kendo().Grid<SDMIndonesiaReports.Models.CustomModels.CustomerShareReportVM>()
+                .Name("grid")
+                .ToolBar(tools =>
+                        {
+                            tools.Template(@<div>
+                                <a class="k-button" data-export="yes" href="@Url.Action("ExportXls", "CustomerShareReport", new { filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~", toPeriodID = "~", profileIDs = '~' })"><span class='k-icon k-i-excel'></span> Export to Excel</a>
+                                <a class="k-button " data-export="yes" href="@Url.Action("ExportPdf", "CustomerShareReport", new { filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~", toPeriodID = "~", profileIDs = '~' })"><span class='k-icon k-i-pdf'></span> Export to PDF</a>
+                            </div>);
+                        })
+            .Pdf(pdf => pdf
+                   .AllPages()
+                   .AvoidLinks()
+                   .Landscape()
+                   .PaperSize("A4")
+                   .Scale(0.8)
+                   .Margin("2cm", "1cm", "1cm", "1cm")
+                   .RepeatHeaders()
+                   .TemplateId("page-template")
+                   .FileName("Customer Share Report.pdf")
+                   )
+
+        .Excel(excell => excell
+            .AllPages(true)
+            .Filterable(true)
+            .FileName("Customer Share Report.xlsx"))
+
+        .Columns(columns =>
+        {
+            columns.Bound(m => m.Province_Name).Title("Province").Width(200).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.City_Name).Title("City").Width(150).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.Brick_Name).Title("Brick").Width(150).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.Pfizer_Customer_Code).Title("Pfizer Cust Code").Width(200).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.Pfizer_Customer_Name).Title("Pfizer Cust Name").Width(200).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.Dosage_Form_Code).Title("Dosage Form Code").Width(200).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            //columns.Bound(m => m.Dosage_Form_Name).Title("Dosage Form Name").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.Product_Name).Title("Product").Width(150).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.Area_Code).Title("AreaCode").Width(150).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            columns.Bound(m => m.Percentage).Title("Percentage").Width(200).HeaderHtmlAttributes(new { style = columnHeaderStyle });
+        })
+       .Pageable(pageable => { pageable.PageSizes(true); pageable.Input(true); pageable.Numeric(true); pageable.Refresh(true); })
+        .Sortable()
+        .Groupable()
+        //.HtmlAttributes(new { style = "height:auto" })
+        .Scrollable(s => s.Height("Auto"))
+        .Filterable()
+        .AutoBind(false)
+                                .Scrollable(s => s.Height("Auto"))
+        .Resizable(resize => resize.Columns(true))
+        .Reorderable(reorder => { reorder.Columns(true); })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Batch(true)
+            .ServerOperation(false)
+
+            .Events(events =>
+            {
+                events.Change("onDataBound");
+            })
+            .PageSize(10)
+                    .Read(read => read.Action("CustomerShareReport_Read", "CustomerShareReport").Data("getParameters")))
+                )
+            </div>
+        </div>
+
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+
+        function getParameters() {
+            return {
+                countryID: $("#Country").val(),
+                fromperiodID: $("#FromPeriods").val(),
+                toPeriodID: $("#ToPeriods").val(),
+                profileIDs: $("#Profiles").val()
+
+            };
+        };
+        function getCountry() {
+
+            return {
+                countryID: $("#Country").val()
+
+            };
+        };
+        function getCountryandPeriods() {
+            return {
+                countryID: $("#Country").val(),
+                fromperiodID: $("#FromPeriods").val(),
+                toPeriodID: $("#ToPeriods").val()
+            };
+        };
+        function reloadGrid() {
+            //do a read request to re-fill the grid with the existing data configurations
+            if ($("#Country").val() != null) {
+
+                var grid = $('#grid').data('kendoGrid');
+                grid.dataSource.read();
+                grid.dataSource.page(1);
+                //grid.refresh();
+
+
+            }
+        }
+        function reloadAll() {
+            if ($("#Country").val() != null) {
+                var Profiles = $("#Profiles").data('kendoMultiSelect');
+
+                Profiles.dataSource.read();
+               // Profiles.refresh();
+
+                var grid = $('#grid').data('kendoGrid');
+                grid.dataSource.read();
+                //grid.refresh();
+            }
+        };
+        function reloadProfiles() {
+            if ($("#Country").val() != null) {
+                var Profiles = $("#Profiles").data('kendoMultiSelect');
+
+                Profiles.dataSource.read();
+            }
+        };
+        function onDataBound(e) {
+
+            var grid = $('#grid').data('kendoGrid');
+            if (grid.dataSource.view().length != 0) {
+
+                $(".k-grid-content").removeAttr("style");
+            }
+            else {
+                $(".k-grid-content").css("height", "20px");
+            }
+
+            var requestObject = (new kendo.data.transports["aspnetmvc-server"]({ prefix: "" }))
+          .options.parameterMap({
+
+              page: grid.dataSource.page(),
+              sort: grid.dataSource.sort(),
+              filter: grid.dataSource.filter(),
+              take: grid.dataSource.take(),
+              countryID: $("#Country").val(),
+              fromperiodID: $("#FromPeriods").val(),
+              toPeriodID: $("#ToPeriods").val(),
+              profileIDs: $("#Profiles").val()
+
+          });
+
+
+            $("[dataexport='yes'],[data-export='yes']").each(function () {
+                // Get its 'href' attribute - the URL where it would navigate to
+                var href = $(this).attr('href');
+
+                // Update the 'page' parameter with the grid's current page
+                href = href.replace(/page=([^&]*)/, 'page=' + requestObject.page || '~');
+
+                // Update the 'sort' parameter with the grid's current sort descriptor
+                href = href.replace(/sort=([^&]*)/, 'sort=' + requestObject.sort || '~');
+
+                // Update the 'pageSize' parameter with the grid's current pageSize
+                href = href.replace(/pageSize=([^&]*)/, 'pageSize=' + grid.dataSource._pageSize);
+
+                //update filter descriptor with the filters applied
+                href = href.replace(/filter=([^&]*)/, 'filter=' + (requestObject.filter || '~'));
+
+                href = href.replace(/countryID=([^&]*)/, 'countryID=' + requestObject.countryID || '~');
+
+                href = href.replace(/fromPeriodID=([^&]*)/, 'fromPeriodID=' + requestObject.fromPeriodID || '~');
+
+                href = href.replace(/toPeriodID=([^&]*)/, 'toPeriodID=' + requestObject.toPeriodID || '~');
+
+                href = href.replace(/profileIDs=([^&]*)/, 'profileIDs=' + $("#Profiles").val() || '~');
+
+
+
+
+                // Update the 'href' attribute
+                $(this).attr('href', href);
+            });
+
+        }
+        $("#kendoIconButton").click(function () {
+            //$("#kendoIconButton").blur();
+            reloadGrid();
+        });
+    </script>
+    <script src="//kendo.cdn.telerik.com/2016.1.112/js/pako_deflate.min.js">
+
+    </script>
+
+}

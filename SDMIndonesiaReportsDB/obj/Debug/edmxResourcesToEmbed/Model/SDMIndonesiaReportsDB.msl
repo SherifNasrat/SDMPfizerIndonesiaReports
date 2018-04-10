@@ -1,0 +1,626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SDW_TargetingModelStoreContainer" CdmEntityContainer="SDW_TargetingEntities">
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="FK_CurrencyID" ColumnName="FK_CurrencyID" />
+          <ScalarProperty Name="MaxLevelsNumber" ColumnName="MaxLevelsNumber" />
+          <ScalarProperty Name="LastUsedID" ColumnName="LastUsedID" />
+          <ScalarProperty Name="DosageFormLevel" ColumnName="DosageFormLevel" />
+          <ScalarProperty Name="SupportTendersInSeparateFile" ColumnName="SupportTendersInSeparateFile" />
+          <ScalarProperty Name="DailyReportingSupport" ColumnName="DailyReportingSupport" />
+          <ScalarProperty Name="AutomaticSalesUploadSupport" ColumnName="AutomaticSalesUploadSupport" />
+          <ScalarProperty Name="AutomaticSalesUploadResultsEmailAddress" ColumnName="AutomaticSalesUploadResultsEmailAddress" />
+          <ScalarProperty Name="DefaultAutomaticSalesUploadMode" ColumnName="DefaultAutomaticSalesUploadMode" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="AdministratorEmailAddress" ColumnName="AdministratorEmailAddress" />
+          <ScalarProperty Name="FK_DefaultStockTypeID" ColumnName="FK_DefaultStockTypeID" />
+          <ScalarProperty Name="ProcessBICubesJobName" ColumnName="ProcessBICubesJobName" />
+          <ScalarProperty Name="SupportTendersInSalesFile" ColumnName="SupportTendersInSalesFile" />
+          <ScalarProperty Name="SupportTargetForSalesType" ColumnName="SupportTargetForSalesType" />
+          <ScalarProperty Name="NationalTargetFormat" ColumnName="NationalTargetFormat" />
+          <ScalarProperty Name="CustomerTargetingLevelFormat" ColumnName="CustomerTargetingLevelFormat" />
+          <ScalarProperty Name="EmployeeTargetFormat" ColumnName="EmployeeTargetFormat" />
+          <ScalarProperty Name="EmployeePhasingOverrideParentLevelPhasing" ColumnName="EmployeePhasingOverrideParentLevelPhasing" />
+          <ScalarProperty Name="AllowTargetEntryForProfile" ColumnName="AllowTargetEntryForProfile" />
+          <ScalarProperty Name="CurrentConfigOLAPLinkedServer" ColumnName="CurrentConfigOLAPLinkedServer" />
+          <ScalarProperty Name="GeographicalOLAPLinkedServer" ColumnName="GeographicalOLAPLinkedServer" />
+          <ScalarProperty Name="SupportTargetSplitting" ColumnName="SupportTargetSplitting" />
+          <ScalarProperty Name="ValidateTargetsAgainstParentLevel" ColumnName="ValidateTargetsAgainstParentLevel" />
+          <ScalarProperty Name="ScoreMappingByJobTitle" ColumnName="ScoreMappingByJobTitle" />
+          <ScalarProperty Name="ScoreMappingByIncentiveGroup" ColumnName="ScoreMappingByIncentiveGroup" />
+          <ScalarProperty Name="FieldForceOLAPLinkedServer" ColumnName="FieldForceOLAPLinkedServer" />
+          <ScalarProperty Name="FK_LocalCurrencyID" ColumnName="FK_LocalCurrencyID" />
+          <ScalarProperty Name="IsSupportCurrencyRate" ColumnName="IsSupportCurrencyRate" />
+          <ScalarProperty Name="DeleteExistingInvoices" ColumnName="DeleteExistingInvoices" />
+          <ScalarProperty Name="SupportNegativeTarget" ColumnName="SupportNegativeTarget" />
+          <ScalarProperty Name="EnablePriceSlices" ColumnName="EnablePriceSlices" />
+          <ScalarProperty Name="SupportExpiryDate" ColumnName="SupportExpiryDate" />
+          <ScalarProperty Name="SupportReturnReasonType" ColumnName="SupportReturnReasonType" />
+          <ScalarProperty Name="CustomerTargetingLevel" ColumnName="CustomerTargetingLevel" />
+          <ScalarProperty Name="FK_PluginID" ColumnName="FK_PluginID" />
+          <ScalarProperty Name="PricesPerArea" ColumnName="PricesPerArea" />
+          <ScalarProperty Name="CalculateAmountForBonus" ColumnName="CalculateAmountForBonus" />
+          <ScalarProperty Name="EmployeeTargetPerArea" ColumnName="EmployeeTargetPerArea" />
+          <ScalarProperty Name="CalculateTargetAmount" ColumnName="CalculateTargetAmount" />
+          <ScalarProperty Name="PricesPerCustomerSectorTargetingGroup" ColumnName="PricesPerCustomerSectorTargetingGroup" />
+          <ScalarProperty Name="AutomaticSalesUploadPeriod" ColumnName="AutomaticSalesUploadPeriod" />
+          <ScalarProperty Name="SupportMDMIntegration" ColumnName="SupportMDMIntegration" />
+          <ScalarProperty Name="EnableOfftake" ColumnName="EnableOfftake" />
+          <ScalarProperty Name="DistributionFee" ColumnName="DistributionFee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CountryPeriods">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.CountryPeriod">
+        <MappingFragment StoreEntitySet="CountryPeriod">
+          <ScalarProperty Name="FK_CountryID" ColumnName="FK_CountryID" />
+          <ScalarProperty Name="FK_PeriodID" ColumnName="FK_PeriodID" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="NumberOfWorkingDays" ColumnName="NumberOfWorkingDays" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerBranches">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.CustomerBranch">
+        <MappingFragment StoreEntitySet="CustomerBranch">
+          <ScalarProperty Name="CustomerBranchID" ColumnName="CustomerBranchID" />
+          <ScalarProperty Name="FK_CustomerID" ColumnName="FK_CustomerID" />
+          <ScalarProperty Name="CustomerBranchCode" ColumnName="CustomerBranchCode" />
+          <ScalarProperty Name="FK_GeographicalAreaID" ColumnName="FK_GeographicalAreaID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="FK_CustomerGroupID" ColumnName="FK_CustomerGroupID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="FK_FromPeriodID" ColumnName="FK_FromPeriodID" />
+          <ScalarProperty Name="FK_ToPeriodID" ColumnName="FK_ToPeriodID" />
+          <ScalarProperty Name="LoadedFromExternalSystem" ColumnName="LoadedFromExternalSystem" />
+          <ScalarProperty Name="FK_IntegrationLogID" ColumnName="FK_IntegrationLogID" />
+          <ScalarProperty Name="eCard" ColumnName="eCard" />
+          <ScalarProperty Name="FK_CustomerCategoryID" ColumnName="FK_CustomerCategoryID" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="TaxRegistrationNumber" ColumnName="TaxRegistrationNumber" />
+          <ScalarProperty Name="isLocked" ColumnName="isLocked" />
+          <ScalarProperty Name="IMSCode" ColumnName="IMSCode" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address4" ColumnName="Address4" />
+          <ScalarProperty Name="DistCode1" ColumnName="DistCode1" />
+          <ScalarProperty Name="DistCode2" ColumnName="DistCode2" />
+          <ScalarProperty Name="DistCode3" ColumnName="DistCode3" />
+          <ScalarProperty Name="DistCode4" ColumnName="DistCode4" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerGroups">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.CustomerGroup">
+        <MappingFragment StoreEntitySet="CustomerGroup">
+          <ScalarProperty Name="CustomerGroupID" ColumnName="CustomerGroupID" />
+          <ScalarProperty Name="CustomerGroupCode" ColumnName="CustomerGroupCode" />
+          <ScalarProperty Name="CustomerGroupName" ColumnName="CustomerGroupName" />
+          <ScalarProperty Name="CustomerGroupAbbrLabel" ColumnName="CustomerGroupAbbrLabel" />
+          <ScalarProperty Name="FK_CustomerSectorId" ColumnName="FK_CustomerSectorId" />
+          <ScalarProperty Name="CustomerGroupType" ColumnName="CustomerGroupType" />
+          <ScalarProperty Name="CustomerGroup_SubDis_Alternate_Name" ColumnName="CustomerGroup_SubDis_Alternate_Name" />
+          <ScalarProperty Name="FK_PluginId" ColumnName="FK_PluginId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="FK_CustomerPlgnID" ColumnName="FK_CustomerPlgnID" />
+          <ScalarProperty Name="PricePerDate" ColumnName="PricePerDate" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="GracePeriod" ColumnName="GracePeriod" />
+          <ScalarProperty Name="FilesSent" ColumnName="FilesSent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerSectors">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.CustomerSector">
+        <MappingFragment StoreEntitySet="CustomerSector">
+          <ScalarProperty Name="CustomerSectorID" ColumnName="CustomerSectorID" />
+          <ScalarProperty Name="CustomerSectorCode" ColumnName="CustomerSectorCode" />
+          <ScalarProperty Name="CustomerSectorName" ColumnName="CustomerSectorName" />
+          <ScalarProperty Name="FK_CountryId" ColumnName="FK_CountryId" />
+          <ScalarProperty Name="FK_CustomerSubTypeID" ColumnName="FK_CustomerSubTypeID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="FK_CustomerSectorTargetingGroupID" ColumnName="FK_CustomerSectorTargetingGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeLogs">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.EmployeeLog">
+        <MappingFragment StoreEntitySet="EmployeeLog">
+          <ScalarProperty Name="EmployeeLogID" ColumnName="EmployeeLogID" />
+          <ScalarProperty Name="FK_EmployeeID" ColumnName="FK_EmployeeID" />
+          <ScalarProperty Name="FK_SupervisorID" ColumnName="FK_SupervisorID" />
+          <ScalarProperty Name="FK_LevelID" ColumnName="FK_LevelID" />
+          <ScalarProperty Name="IsMedicalRep" ColumnName="IsMedicalRep" />
+          <ScalarProperty Name="VacantRecord" ColumnName="VacantRecord" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Marketing" ColumnName="Marketing" />
+          <ScalarProperty Name="FK_FromPeriodID" ColumnName="FK_FromPeriodID" />
+          <ScalarProperty Name="FK_ToPeriodID" ColumnName="FK_ToPeriodID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeProfiles">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.EmployeeProfile">
+        <MappingFragment StoreEntitySet="EmployeeProfile">
+          <ScalarProperty Name="EmployeeProfileID" ColumnName="EmployeeProfileID" />
+          <ScalarProperty Name="FK_EmployeeID" ColumnName="FK_EmployeeID" />
+          <ScalarProperty Name="FK_ProfileID" ColumnName="FK_ProfileID" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="AssignmentType" ColumnName="AssignmentType" />
+          <ScalarProperty Name="FK_FromPeriodID" ColumnName="FK_FromPeriodID" />
+          <ScalarProperty Name="FK_ToPeriodID" ColumnName="FK_ToPeriodID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeRecords">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.EmployeeRecord">
+        <MappingFragment StoreEntitySet="EmployeeRecord">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="InsuranceNo" ColumnName="InsuranceNo" />
+          <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FK_CountryID" ColumnName="FK_CountryID" />
+          <ScalarProperty Name="HiringDate" ColumnName="HiringDate" />
+          <ScalarProperty Name="ResignationDate" ColumnName="ResignationDate" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="PeopleSoft" ColumnName="PeopleSoft" />
+          <ScalarProperty Name="NT_Account" ColumnName="NT_Account" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IsFieldTrainer" ColumnName="IsFieldTrainer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeographicalAreas">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.GeographicalArea">
+        <MappingFragment StoreEntitySet="GeographicalArea">
+          <ScalarProperty Name="GeographicalAreaID" ColumnName="GeographicalAreaID" />
+          <ScalarProperty Name="GeographicalAreaCode" ColumnName="GeographicalAreaCode" />
+          <ScalarProperty Name="GeographicalAreaName" ColumnName="GeographicalAreaName" />
+          <ScalarProperty Name="GeographicalAreaAbbrLabel" ColumnName="GeographicalAreaAbbrLabel" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FK_ParentID" ColumnName="FK_ParentID" />
+          <ScalarProperty Name="LevelsNo" ColumnName="LevelsNo" />
+          <ScalarProperty Name="FK_CountryID" ColumnName="FK_CountryID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="FK_GeographicalAreaTypeID" ColumnName="FK_GeographicalAreaTypeID" />
+          <ScalarProperty Name="FK_SalesTerritoryID" ColumnName="FK_SalesTerritoryID" />
+          <ScalarProperty Name="FK_StateTerritoryID" ColumnName="FK_StateTerritoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Levels">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.Level">
+        <MappingFragment StoreEntitySet="Level">
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="LevelCode" ColumnName="LevelCode" />
+          <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+          <ScalarProperty Name="LevelAbbrLabel" ColumnName="LevelAbbrLabel" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="FK_CountryId" ColumnName="FK_CountryId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Periods">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.Period">
+        <MappingFragment StoreEntitySet="Period">
+          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+          <ScalarProperty Name="PeriodCode" ColumnName="PeriodCode" />
+          <ScalarProperty Name="PeriodName" ColumnName="PeriodName" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="FK_PeriodLYID" ColumnName="FK_PeriodLYID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.Profile">
+        <MappingFragment StoreEntitySet="Profile">
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+          <ScalarProperty Name="ProfileCode" ColumnName="ProfileCode" />
+          <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+          <ScalarProperty Name="FK_CountryId" ColumnName="FK_CountryId" />
+          <ScalarProperty Name="FK_SalesTeamID" ColumnName="FK_SalesTeamID" />
+          <ScalarProperty Name="FK_FromPeriodID" ColumnName="FK_FromPeriodID" />
+          <ScalarProperty Name="FK_ToPeriodID" ColumnName="FK_ToPeriodID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="IsWholesale" ColumnName="IsWholesale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileAdditionalAccounts">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.ProfileAdditionalAccount">
+        <MappingFragment StoreEntitySet="ProfileAdditionalAccount">
+          <ScalarProperty Name="AdditionalAccountId" ColumnName="AdditionalAccountId" />
+          <ScalarProperty Name="FK_ProfileId" ColumnName="FK_ProfileId" />
+          <ScalarProperty Name="FK_CustomerBranchId" ColumnName="FK_CustomerBranchId" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="AssignmentSalesType" ColumnName="AssignmentSalesType" />
+          <ScalarProperty Name="FK_FromPeriodID" ColumnName="FK_FromPeriodID" />
+          <ScalarProperty Name="FK_ToPeriodID" ColumnName="FK_ToPeriodID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="FK_AdditionalAccountID" ColumnName="FK_AdditionalAccountID" />
+          <ScalarProperty Name="FK_DosageFormId" ColumnName="FK_DosageFormId" />
+          <ScalarProperty Name="FK_ProductId" ColumnName="FK_ProductId" />
+          <ScalarProperty Name="FK_ProfileAdditionalAccountsUploadID" ColumnName="FK_ProfileAdditionalAccountsUploadID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileGeographicalAreas">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.ProfileGeographicalArea">
+        <MappingFragment StoreEntitySet="ProfileGeographicalAreas">
+          <ScalarProperty Name="ProfileGeographicalAreasId" ColumnName="ProfileGeographicalAreasId" />
+          <ScalarProperty Name="FK_ProfileId" ColumnName="FK_ProfileId" />
+          <ScalarProperty Name="FK_GeographicalAreaId" ColumnName="FK_GeographicalAreaId" />
+          <ScalarProperty Name="FK_FromPeriodID" ColumnName="FK_FromPeriodID" />
+          <ScalarProperty Name="FK_ToPeriodID" ColumnName="FK_ToPeriodID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesTeams">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.SalesTeam">
+        <MappingFragment StoreEntitySet="SalesTeam">
+          <ScalarProperty Name="SalesTeamID" ColumnName="SalesTeamID" />
+          <ScalarProperty Name="SalesTeamCode" ColumnName="SalesTeamCode" />
+          <ScalarProperty Name="SalesTeamName" ColumnName="SalesTeamName" />
+          <ScalarProperty Name="FK_SalesTeamTypeID" ColumnName="FK_SalesTeamTypeID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesTeamTypes">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.SalesTeamType">
+        <MappingFragment StoreEntitySet="SalesTeamType">
+          <ScalarProperty Name="SalesTeamTypeID" ColumnName="SalesTeamTypeID" />
+          <ScalarProperty Name="SalesTeamTypeName" ColumnName="SalesTeamTypeName" />
+          <ScalarProperty Name="OutSourced" ColumnName="OutSourced" />
+          <ScalarProperty Name="FK_CountryId" ColumnName="FK_CountryId" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemUsers">
+      <EntityTypeMapping TypeName="SDW_TargetingModel.SystemUser">
+        <MappingFragment StoreEntitySet="SystemUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="FK_RoleId" ColumnName="FK_RoleId" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FK_AddedBy" ColumnName="FK_AddedBy" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="FK_LastModifiedBy" ColumnName="FK_LastModifiedBy" />
+          <ScalarProperty Name="FK_EmployeeID" ColumnName="FK_EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_BudAndAchByAM" FunctionName="SDW_TargetingModel.Store.SP_BudAndAchByAM">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_BudAndAchByAM_Result">
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="AM" ColumnName="AM" />
+          <ScalarProperty Name="Product_Group" ColumnName="Product Group" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="Target_Quantity" ColumnName="Target Quantity" />
+          <ScalarProperty Name="Sales_Quantity" ColumnName="Sales Quantity" />
+          <ScalarProperty Name="Target_Amount" ColumnName="Target Amount" />
+          <ScalarProperty Name="Sales_Amount" ColumnName="Sales Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_BudAndAchbyCountry" FunctionName="SDW_TargetingModel.Store.SP_BudAndAchbyCountry">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_BudAndAchbyCountry_Result">
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Product_Group" ColumnName="Product Group" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="Target_Quantity" ColumnName="Target Quantity" />
+          <ScalarProperty Name="Sales_Quantity" ColumnName="Sales Quantity" />
+          <ScalarProperty Name="Target_Amount" ColumnName="Target Amount" />
+          <ScalarProperty Name="Sales_Amount" ColumnName="Sales Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_BudAndAchbyHCR" FunctionName="SDW_TargetingModel.Store.SP_BudAndAchbyHCR">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_BudAndAchbyHCR_Result">
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="AM" ColumnName="AM" />
+          <ScalarProperty Name="HCR" ColumnName="HCR" />
+          <ScalarProperty Name="Product_Group" ColumnName="Product Group" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="Target_Quantity" ColumnName="Target Quantity" />
+          <ScalarProperty Name="Sales_Quantity" ColumnName="Sales Quantity" />
+          <ScalarProperty Name="Target_Amount" ColumnName="Target Amount" />
+          <ScalarProperty Name="Sales_Amount" ColumnName="Sales Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_BudAndAchBySM" FunctionName="SDW_TargetingModel.Store.SP_BudAndAchBySM">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_BudAndAchBySM_Result">
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="Product_Group" ColumnName="Product Group" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="Target_Quantity" ColumnName="Target Quantity" />
+          <ScalarProperty Name="Sales_Quantity" ColumnName="Sales Quantity" />
+          <ScalarProperty Name="Target_Amount" ColumnName="Target Amount" />
+          <ScalarProperty Name="Sales_Amount" ColumnName="Sales Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_CustomerShareReport" FunctionName="SDW_TargetingModel.Store.SP_CustomerShareReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_CustomerShareReport_Result">
+          <ScalarProperty Name="Province_Name" ColumnName="Province Name" />
+          <ScalarProperty Name="City_Name" ColumnName="City Name" />
+          <ScalarProperty Name="Brick_Name" ColumnName="Brick Name" />
+          <ScalarProperty Name="Pfizer_Customer_Code" ColumnName="Pfizer Customer Code" />
+          <ScalarProperty Name="Pfizer_Customer_Name" ColumnName="Pfizer Customer Name" />
+          <ScalarProperty Name="Dosage_Form_Code" ColumnName="Dosage Form Code" />
+          <ScalarProperty Name="Dosage_Form_Name" ColumnName="Dosage Form Name" />
+          <ScalarProperty Name="Product_Name" ColumnName="Product Name" />
+          <ScalarProperty Name="Area_Code" ColumnName="Area Code" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_FFConfig" FunctionName="SDW_TargetingModel.Store.SP_FFConfig">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_FFConfig_Result">
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="HCR_Name" ColumnName="HCR Name" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+          <ScalarProperty Name="Vacant" ColumnName="Vacant" />
+          <ScalarProperty Name="AM" ColumnName="AM" />
+          <ScalarProperty Name="SM" ColumnName="SM" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_FFPerformanceByFFConfig" FunctionName="SDW_TargetingModel.Store.SP_FFPerformanceByFFConfig">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_FFPerformanceByFFConfig_Result">
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="AM" ColumnName="AM" />
+          <ScalarProperty Name="HCR" ColumnName="HCR" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="ATT" ColumnName="ATT" />
+          <ScalarProperty Name="Bud" ColumnName="Bud" />
+          <ScalarProperty Name="Ach" ColumnName="Ach" />
+          <ScalarProperty Name="Perf" ColumnName="Perf" />
+          <ScalarProperty Name="MCR" ColumnName="MCR" />
+          <ScalarProperty Name="DCR" ColumnName="DCR" />
+          <ScalarProperty Name="PC" ColumnName="PC" />
+          <ScalarProperty Name="EC" ColumnName="EC" />
+          <ScalarProperty Name="Acc" ColumnName="Acc" />
+          <ScalarProperty Name="Pre" ColumnName="Pre" />
+          <ScalarProperty Name="JV" ColumnName="JV" />
+          <ScalarProperty Name="Perf2" ColumnName="Perf2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_FFPerformanceByFFConfig_AM" FunctionName="SDW_TargetingModel.Store.SP_FFPerformanceByFFConfig_AM">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_FFPerformanceByFFConfig_AM_Result">
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="AM" ColumnName="AM" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="ATT" ColumnName="ATT" />
+          <ScalarProperty Name="Bud" ColumnName="Bud" />
+          <ScalarProperty Name="Ach" ColumnName="Ach" />
+          <ScalarProperty Name="Perf" ColumnName="Perf" />
+          <ScalarProperty Name="MCR" ColumnName="MCR" />
+          <ScalarProperty Name="DCR" ColumnName="DCR" />
+          <ScalarProperty Name="PC" ColumnName="PC" />
+          <ScalarProperty Name="EC" ColumnName="EC" />
+          <ScalarProperty Name="Acc" ColumnName="Acc" />
+          <ScalarProperty Name="Pre" ColumnName="Pre" />
+          <ScalarProperty Name="JV" ColumnName="JV" />
+          <ScalarProperty Name="Perf2" ColumnName="Perf2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_FFPerformanceByFFConfig_SM" FunctionName="SDW_TargetingModel.Store.SP_FFPerformanceByFFConfig_SM">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_FFPerformanceByFFConfig_SM_Result">
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="ATT" ColumnName="ATT" />
+          <ScalarProperty Name="Bud" ColumnName="Bud" />
+          <ScalarProperty Name="Ach" ColumnName="Ach" />
+          <ScalarProperty Name="Perf" ColumnName="Perf" />
+          <ScalarProperty Name="MCR" ColumnName="MCR" />
+          <ScalarProperty Name="DCR" ColumnName="DCR" />
+          <ScalarProperty Name="PC" ColumnName="PC" />
+          <ScalarProperty Name="EC" ColumnName="EC" />
+          <ScalarProperty Name="Acc" ColumnName="Acc" />
+          <ScalarProperty Name="Pre" ColumnName="Pre" />
+          <ScalarProperty Name="JV" ColumnName="JV" />
+          <ScalarProperty Name="Perf2" ColumnName="Perf2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetProfileByPeriods" FunctionName="SDW_TargetingModel.Store.SP_GetProfileByPeriods">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_GetProfileByPeriods_Result">
+          <ScalarProperty Name="profilename" ColumnName="profilename" />
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_HHCRPerformanceByProduct" FunctionName="SDW_TargetingModel.Store.SP_HHCRPerformanceByProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_HHCRPerformanceByProduct_Result">
+          <ScalarProperty Name="Profile" ColumnName="Profile" />
+          <ScalarProperty Name="HCR" ColumnName="HCR" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="Att" ColumnName="Att" />
+          <ScalarProperty Name="Bud" ColumnName="Bud" />
+          <ScalarProperty Name="Ach" ColumnName="Ach" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TeamToProduct" FunctionName="SDW_TargetingModel.Store.SP_TeamToProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_TeamToProduct_Result">
+          <ScalarProperty Name="Team_Code" ColumnName="Team Code" />
+          <ScalarProperty Name="Team_Name" ColumnName="Team Name" />
+          <ScalarProperty Name="AP" ColumnName="AP" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Tier" ColumnName="Tier" />
+          <ScalarProperty Name="Product_Group" ColumnName="Product Group" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TerritoryBrickbyBrick_Helper" FunctionName="SDW_TargetingModel.Store.SP_TerritoryBrickbyBrick_Helper">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_TerritoryBrickbyBrick_Helper_Result">
+          <ScalarProperty Name="SalesTeamName" ColumnName="SalesTeamName" />
+          <ScalarProperty Name="ProfileCode" ColumnName="ProfileCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TerritoryToBrickByArea" FunctionName="SDW_TargetingModel.Store.SP_TerritoryToBrickByArea">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_TerritoryToBrickByArea_Result">
+          <ScalarProperty Name="PeriodName" ColumnName="PeriodName" />
+          <ScalarProperty Name="Profile_Code" ColumnName="Profile Code" />
+          <ScalarProperty Name="Medical_Rep" ColumnName="Medical Rep" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Brick_Code" ColumnName="Brick_Code" />
+          <ScalarProperty Name="Brick" ColumnName="Brick" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TerritorytoBrickbyBrick_getBricks" FunctionName="SDW_TargetingModel.Store.SP_TerritorytoBrickbyBrick_getBricks">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_TerritorytoBrickbyBrick_getBricks_Result">
+          <ScalarProperty Name="BrickID" ColumnName="BrickID" />
+          <ScalarProperty Name="Brick" ColumnName="Brick" />
+          <ScalarProperty Name="BrickCode" ColumnName="BrickCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TransactionDetail" FunctionName="SDW_TargetingModel.Store.SP_TransactionDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_TransactionDetail_Result">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+          <ScalarProperty Name="Product_Name" ColumnName="Product Name" />
+          <ScalarProperty Name="Cust_Code" ColumnName="Cust Code" />
+          <ScalarProperty Name="Cust_Name" ColumnName="Cust Name" />
+          <ScalarProperty Name="Sector" ColumnName="Sector" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Brick" ColumnName="Brick" />
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="AM" ColumnName="AM" />
+          <ScalarProperty Name="HCR" ColumnName="HCR" />
+          <ScalarProperty Name="Profile" ColumnName="Profile" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TransactionSummarybyChannel_getSectorsQtyPerRecord" FunctionName="SDW_TargetingModel.Store.SP_TransactionSummarybyChannel_getSectorsQtyPerRecord">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_TransactionSummarybyChannel_getSectorsQtyPerRecord_Result">
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TransactionSummarybyChannel_Helper" FunctionName="SDW_TargetingModel.Store.SP_TransactionSummarybyChannel_Helper">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SDW_TargetingModel.SP_TransactionSummarybyChannel_Helper_Result">
+          <ScalarProperty Name="Province_ID" ColumnName="Province ID" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City_ID" ColumnName="City ID" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Brick_ID" ColumnName="Brick ID" />
+          <ScalarProperty Name="Brick" ColumnName="Brick" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product ID" />
+          <ScalarProperty Name="Product_Group" ColumnName="Product Group" />
+          <ScalarProperty Name="HCR_ID" ColumnName="HCR ID" />
+          <ScalarProperty Name="HCR" ColumnName="HCR" />
+          <ScalarProperty Name="AM" ColumnName="AM" />
+          <ScalarProperty Name="SM" ColumnName="SM" />
+          <ScalarProperty Name="Profile_ID" ColumnName="Profile ID" />
+          <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+          <ScalarProperty Name="DosageForm_ID" ColumnName="DosageForm ID" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_TransactionSummaryByChannel_Sectors" FunctionName="SDW_TargetingModel.Store.SP_TransactionSummaryByChannel_Sectors" />
+    <FunctionImportMapping FunctionImportName="SP_GetSystemUserCountries" FunctionName="SDW_TargetingModel.Store.SP_GetSystemUserCountries" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,240 @@
+﻿@using SDMIndonesiaReports.App_GlobalResources;
+@using Resources;
+@using SDMIndonesiaReports.Shared;
+@model SDMIndonesiaReports.Models.CustomModels.TerritoryToBrickByAreaVM
+@{
+    ViewBag.Title = Resources.Pages_Resources.territoryToBrickByArea;
+    var classDiv = (SDMIndonesiaReports.Shared.CultureHelper.IsRighToLeft()) ? "k-rtl" : "portlet-body";
+    string columnHeaderStyle = "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;text-align: center;";
+    SessionContainer.BreadCrumbText = new List<string>();
+    SessionContainer.BreadCrumbLinks = new List<string>();
+    SessionContainer.BreadCrumbText.Add(Pages_Resources.territoryToBrickByArea);
+    SessionContainer.BreadCrumbLinks.Add(Url.Action("Index", "TerritoryToBrickByArea"));
+}
+
+<div class="row-fluid">
+    <div class="span6 responsive" data-tablet="span12 fix-offset" data-desktop="span6" style="width: 100%;">
+        <div class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption"><i class="icon-user"></i>@Resources.Pages_Resources.territoryToBrickByArea</div>
+                <div class="actions">
+                        <div class="btn-group">
+                            @*@(Html.Kendo().ToolBar().Name("Export"))
+                                {
+
+                                }
+                            )*@
+
+                            @*<a class="btn green" href="#" data-toggle="dropdown">
+                                <i class="icon-cogs"></i> @Global_Label_Resource.Export
+                                <i class="icon-angle-down"></i>
+                            </a>
+
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a id="ExportPdfbtn" data-export="yes" href="@Url.Action("ExportPdf", "TerritoryToBrickByArea", new {filter = "~", sort = "~", state = "~" , countryID = "~", fromPeriodID = "~", toPeriodID = "~" })">
+                                        <i class="@Global_UI_Resource.IconDownload"></i>Export Pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="ExportXlsbtn" data-export="yes" href="@Url.Action("ExportXls", "TerritoryToBrickByArea", new { pageSize = "~", filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~", toPeriodID = "~" })">
+                                        <i class="@Global_UI_Resource.IconDownload"></i>Export Xls
+                                    </a>
+                                </li>
+                            </ul>*@
+                        </div>
+                    </div>
+            </div>
+            <div class="clearfix">
+                <div class="pull-right">
+
+                    @(Html.Kendo().DropDownList()
+                              .Name("Country")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .BindTo(ViewBag.CountriesDL as List<SelectListItem>)
+                              
+                              .OptionLabel("Select Country")
+                                     // .Events(e => e.Change("reloadGrid"))
+                    )
+
+                    @(Html.Kendo().DropDownList()
+                            // .Events(e => e.Select("reloadGrid"))
+                              .Name("FromPeriod")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .DataSource(source => source.Read(read =>
+                              {
+                                  read.Action("Periods_Read", "TerritoryToBrickByArea").Data("getCountry");
+                              })
+                              .ServerFiltering(true)
+                              )
+                              
+                              .CascadeFrom("Country")
+                                     // .Events(e => { e.Change("reloadGrid"); })
+                              .OptionLabel(new { Text = "From Period", Value = (int?)null })
+                    )
+
+                    @(Html.Kendo().DropDownList()
+                            // .Events(e => e.Select("reloadGrid"))
+                              .Name("ToPeriod")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .DataSource(source => source.Read(read =>
+                              {
+                                  read.Action("Periods_Read", "TerritoryToBrickByArea").Data("getCountry");
+                              })
+                              .ServerFiltering(true)
+                              )
+
+                              .CascadeFrom("Country")
+                                     // .Events(e => { e.Change("reloadGrid"); })
+                              .OptionLabel(new { Text = "To Period", Value = (int?)null })
+                    )
+                    <a id="kendoIconButton" class="btn blue" style="height:14px; width:auto;margin-top:1px; margin-right:10px; text-align:center; line-height:14px">@Global_Label_Resource.viewreport</a>
+                </div>
+            </div>
+            <div class="@classDiv">
+                @(Html.Kendo().Grid<SDMIndonesiaReports.Models.CustomModels.TerritoryToBrickByAreaVM>()
+                .Name("grid")
+                        .ToolBar(tools =>
+                                {
+                                    tools.Template(@<div>
+                                <a class="k-button" data-export="yes" href="@Url.Action("ExportXls", "TerritoryToBrickByArea", new { filter = "~", sort = "~", state = "~", countryID = "~",fromPeriodID = "~",toPeriodID = "~" })"><span class='k-icon k-i-excel'></span> Export to Excel</a>
+                                                        <a class="k-button " data-export="yes" href="@Url.Action("ExportPdf", "TerritoryToBrickByArea", new { filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~",toPeriodID = "~" })"><span class='k-icon k-i-pdf'></span> Export to PDF</a></div>);
+                    
+                                    //tools.Pdf();
+                                }
+                        )
+                                 .Pdf(pdf => pdf
+                                           .AllPages()
+                                           .AvoidLinks()
+                                           .Landscape()
+                                           .PaperSize("A4")
+                                           .Scale(0.8)
+                                           .Margin("2cm", "1cm", "1cm", "1cm")
+                                           .RepeatHeaders()
+                                           .TemplateId("page-template")
+                                           .FileName("Customer Share Report.pdf")
+                                           )
+            .Columns(columns =>
+            {
+                columns.Bound(m => m.Period_Year).Title("Period").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+                columns.Bound(m => m.Profile_Code).Title("Area").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+                columns.Bound(m => m.Medical_Rep).Title("HCR").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+                columns.Bound(m => m.Province).Title("Province").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+                columns.Bound(m => m.City).Title("City").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+                columns.Bound(m => m.Brick_Code).Title("Brick Code").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+                columns.Bound(m => m.Brick).Title("Brick").HeaderHtmlAttributes(new { style = columnHeaderStyle });
+            })
+
+            .Pageable(pageable => { pageable.PageSizes(true); pageable.Input(true); pageable.Numeric(true); pageable.Refresh(true); })
+            .Sortable()
+            .Groupable()
+            .Filterable()
+            .AutoBind(false)
+            .Resizable(resize => resize.Columns(true))
+            .Reorderable(reorder => { reorder.Columns(true); })
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .Batch(true)
+            .ServerOperation(true)
+
+            .Events(events =>
+            {
+                events.Change("onDataBound");
+            })
+            .PageSize(10)
+            .Read(read => read.Action("TerritoryToBrickbyArea_Read", "TerritoryToBrickByArea").Data("getParameters")))
+                )
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+  
+
+        function getParameters() {
+        
+            return {
+                countryID: $("#Country").val(),
+                fromPeriodID: $("#FromPeriod").val(),
+                toPeriodID: $("#ToPeriod").val()
+                };
+      
+        
+        };
+        function getCountry() {
+
+            return {
+                countryID: $("#Country").val()
+
+            };//
+        };
+            //do a read request to re-fill the grid with the existing data configurations
+        function reloadGrid(){
+            if ($("#Country").val() != null) {
+                var grid = $('#grid').data('kendoGrid');
+                grid.dataSource.read();
+                grid.dataSource.filter();
+                grid.dataSource.page(1);
+
+             
+        
+            }
+            
+        }
+   
+        function onDataBound(e) {
+           
+            var grid = $('#grid').data('kendoGrid');
+            var requestObject = (new kendo.data.transports["aspnetmvc-server"]({ prefix: "" }))
+          .options.parameterMap({
+              page: grid.dataSource.page(),
+              sort: grid.dataSource.sort(),
+              filter: grid.dataSource.filter(),
+              take: grid.dataSource.take(),
+              countryID: $("#Country").val(),
+              fromPeriodID: $("#FromPeriod").val(),
+              toPeriodID: $("#ToPeriod").val()
+          });
+
+
+            $("[dataexport='yes'],[data-export='yes']").each(function () {
+                // Get its 'href' attribute - the URL where it would navigate to
+                var href = $(this).attr('href');
+
+
+
+               
+
+                // Update the 'page' parameter with the grid's current page
+                href = href.replace(/page=([^&]*)/, 'page=' + requestObject.page || '~');
+
+                // Update the 'sort' parameter with the grid's current sort descriptor
+                href = href.replace(/sort=([^&]*)/, 'sort=' + requestObject.sort || '~');
+
+                // Update the 'pageSize' parameter with the grid's current pageSize
+                href = href.replace(/pageSize=([^&]*)/, 'pageSize=' + grid.dataSource._pageSize);
+
+                //update filter descriptor with the filters applied
+                href = href.replace(/filter=([^&]*)/, 'filter=' + (requestObject.filter || '~'));
+
+                href = href.replace(/countryID=([^&]*)/, 'countryID=' + requestObject.countryID || '~');
+
+                href = href.replace(/fromPeriodID=([^&]*)/, 'fromPeriodID=' + requestObject.fromPeriodID || '~');
+
+                href = href.replace(/toPeriodID=([^&]*)/, 'toPeriodID=' + requestObject.toPeriodID || '~');
+                // Update the 'href' attribute
+                $(this).attr('href', href);
+            });
+
+        }
+        $("#kendoIconButton").click(function () {
+            //$("#kendoIconButton").blur();
+            reloadGrid();
+        });
+    </script>
+
+}

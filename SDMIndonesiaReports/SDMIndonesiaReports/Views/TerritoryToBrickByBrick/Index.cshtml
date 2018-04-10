@@ -1,0 +1,524 @@
+﻿@using SDMIndonesiaReports.App_GlobalResources;
+@using Resources;
+@using SDMIndonesiaReports.Shared;
+
+<script type="text/javascript">
+
+    $(function () {
+       
+        InitializeGrid();
+       
+    });
+</script>
+
+@{
+    ViewBag.Title = Resources.Pages_Resources.territorytobrickbybrick;
+    string columnHeaderStyle = "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;";
+    var classDiv = (SDMIndonesiaReports.Shared.CultureHelper.IsRighToLeft()) ? "k-rtl" : "portlet-body";
+    SessionContainer.BreadCrumbText = new List<string>();
+    SessionContainer.BreadCrumbLinks = new List<string>();
+    SessionContainer.BreadCrumbText.Add(Pages_Resources.territorytobrickbybrick);
+    SessionContainer.BreadCrumbLinks.Add(Url.Action("Index", "TerritoryToBrickByBrick"));
+}
+
+<div class="row-fluid">
+    <div class="span6 responsive" data-tablet="span12 fix-offset" data-desktop="span6" style="width: 100%;">
+        <div class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption"><i class="icon-user"></i>@Resources.Pages_Resources.territorytobrickbybrick</div>
+            </div>
+            <div class="clearfix">
+                <div class="pull-right">
+
+
+
+                    @(Html.Kendo().DropDownList()
+                              .Name("Country")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .DataSource(source => source.Read(read =>
+                              {
+                                  read.Action("Countries_Read", "TerritoryToBrickByBrick");
+                              })
+                              .ServerFiltering(true)
+                              )
+                                                       //.Events(e => { e.Change("reloadGrid");  })
+                              .OptionLabel("Select Country")
+
+
+                    )
+
+                    @(Html.Kendo().DropDownList()
+                                  .Name("FromPeriods")
+                                  .DataTextField("Text")
+                                  .DataValueField("Value")
+                                  .DataSource(source => source.Read(read =>
+                                  {
+                                      read.Action("Periods_Read", "TerritoryToBrickByBrick").Data("getCountry");
+                                  })
+                                  .ServerFiltering(true)
+                                  )
+                                                                                         // .Events(e => { e.Change("reloadGrid"); })
+                                  .CascadeFrom("Country")
+                                          .OptionLabel(new { Text = "Select From Period", Value = (int?)null })
+
+                    )
+                    @(Html.Kendo().DropDownList()
+                                .Name("ToPeriods")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .DataSource(source => source.Read(read =>
+                                {
+                                    read.Action("Periods_Read", "TerritoryToBrickByBrick").Data("getCountry");
+                                })
+                                .ServerFiltering(true)
+                                )
+                                                                        //.Events(e => { e.Change("reloadGrid"); })
+                                .CascadeFrom("Country")
+                                        .OptionLabel(new { Text = "Select To Period", Value = (int?)null })
+                            // e.DataBound("disablePeriods");
+                    )
+                    <a id="kendoIconButton" class="btn blue" style="height:14px; width:auto;margin-top:1px; margin-right:10px; text-align:center; line-height:14px">@Global_Label_Resource.viewreport</a>
+
+                </div>
+
+
+            </div>
+
+            <div id="GridContainer" class="@classDiv">
+               
+                
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+@section scripts{
+
+
+
+
+    <script type="text/javascript">
+
+        var grid;
+        var viewModel;
+        function InitializeGrid() {
+            //add the #example again
+            var div = document.getElementById('GridContainer');
+            var ele = document.createElement("div");
+            ele.setAttribute("id", 'example');
+            div.appendChild(ele);
+            //add the #grid
+            var div = document.getElementById('example');
+            var ele = document.createElement("div");
+            ele.setAttribute("id", 'grid');
+            div.appendChild(ele);
+
+            $("#grid").kendoGrid({
+
+                groupable: true,
+                sortable: true,
+                toolbar: kendo.template($("#exportToolbar").html()),
+                filterable: true,
+                autoBinding: false,
+                pageable: {
+                    refresh: true,
+                    input: true,
+                    numeric: true,
+                    pageSizes: true,
+
+                },
+                columns: [
+                    {
+                        field: "",
+                        title: "BrickCode",
+                        width: 150,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+
+                        }
+                    },
+                    {
+                        field: "",
+                        title: "Brick",
+                        width: 150,
+                        headerAttributes: {
+                            "class": "table-header-cell",
+                            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                        }
+                    }
+                ]
+            });
+        };
+        function CreateGridDiv() {
+            //add the #example again
+            var div = document.getElementById('GridContainer');
+            var ele = document.createElement("div");
+            ele.setAttribute("id", 'example');
+            ele.setAttribute("class", "k-content");
+            div.appendChild(ele);
+            //add the #grid
+            var div = document.getElementById('example');
+            var ele = document.createElement("table");
+            ele.setAttribute("id", 'grid');
+            ele.setAttribute("data-bind", "source: gridRows");
+            div.appendChild(ele);
+        };
+
+
+        function reloadGrid() {
+            
+            kendo.ui.progress($("#grid"), true);
+            disableInput();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("TerritoryToBrickbyBrick_Read")',
+                //async: false,
+                data: { countryID: $("#Country").val(), fromPeriodID: $("#FromPeriods").val(), toPeriodID: $("#ToPeriods").val() },
+                cache: false,
+                success: function (result) {
+                    $("#example").remove();
+                    kendo.ui.progress($("#grid"), false);
+                    if (result.rowCount > 0 && result.columnCount > 0) { //Case When: Bricks > 0 , Teams > 0  => Display data 
+
+                        CreateGridDiv();
+                        var rows = [];
+                        var newArr = [];
+                        while (result.dataArray.length)
+                            newArr.push(result.dataArray.splice(0, result.columnCount));
+                        for (var i = 0; i < result.rowCount; i++) {
+                            entryArray = [];
+                            for (var j = 0; j < result.columnCount; j++) {
+                                entryArray.push(newArr[i][j]);
+
+                            }
+                            rows.push(kendo.observable({
+                                entries: entryArray
+                            }));
+                        }
+                        var viewModel = kendo.observable({
+                            gridRows: rows
+                        });
+                        var columns = [];
+                        columns.push({
+                            field: "entries[0]",
+                            title: "BrickCode",
+                            width: 150,
+                            locked: true,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                            }
+                        });
+                        columns.push({
+                            field: "entries[1]",
+                            title: "Brick",
+                            width: 150,
+                            locked: true,
+                            headerAttributes: {
+                                "class": "table-header-cell",
+                                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                            }
+                        });
+                        for (var i = 2; i < result.columnCount; i++) {
+                            var entryIndex = "entries[" + i + "]";
+
+                            columns.push({
+                                field: entryIndex,
+                                title: result.teamsList[i-2],
+                                width: 300,
+                                headerAttributes: {
+                                    "class": "table-header-cell",
+                                    style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                                }
+                            });
+                        }
+                        var configuration = {
+                            filterable: true,
+                            resizable: true,
+                            dataSource: { pageSize: 10 },
+                            sortable: true,
+                            groupable: true,
+                            columnMenu: true,
+                            height:'auto',
+                            dataBound: onDataBound,
+                            toolbar: kendo.template($("#exportToolbar").html()),
+                            scrollable: {
+                                scrollable: true
+                                ,
+                                height: 'auto'
+
+                            },
+
+                            pageable: {
+                                refresh: true,
+                                input: true,
+                                numeric: true,
+                                pageSizes: true,
+                                buttonCount: 5
+                            },
+                            columns: columns
+                        };
+
+                       
+                        grid = $("#grid").kendoGrid(configuration);
+                        kendo.bind($('#example'), viewModel);
+                        enableInput();
+                    }
+                    //else if (result.rowCount == 0 && result.columnCount > 0) //Case When: Bricks = 0 , Teams > 0  => Display column headers only
+                    //{
+                    //    CreateGridDiv();
+                    //    var viewModel = kendo.observable({
+                    //        gridRows: rows
+                    //    });
+                    //    var columns = [];
+                    //    columns.push({
+                    //        field: "",
+                    //        title: "BrickCode",
+                    //        width: 150,
+                    //        //locked: true,
+                    //        headerAttributes: {
+                    //            "class": "table-header-cell",
+                    //            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                    //        }
+                    //    });
+                    //    columns.push({
+                    //        field: "",
+                    //        title: "Brick",
+                    //        width: 150,
+                    //        //locked: true,
+                    //        headerAttributes: {
+                    //            "class": "table-header-cell",
+                    //            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                    //        }
+                    //    });
+                    //    for (var i = 0; i < result.columnCount; i++) {
+                            
+
+                    //        columns.push({
+                    //            field: "",
+                    //            title: result.teamsList[i],
+                    //            width: 300,
+                    //            headerAttributes: {
+                    //                "class": "table-header-cell",
+                    //                style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                    //            }
+                    //        });
+                    //    }
+                    //    var configuration = {
+                    //        filterable: true,
+                    //        resizable: true,
+                    //        dataSource: { pageSize: 10 },
+                    //        sortable: true,
+                    //        groupable: true,
+                    //        columnMenu: true,
+
+                    //        dataBound: onDataBound,
+                    //        toolbar: kendo.template($("#exportToolbar").html()),
+                    //        scrollable: {
+                    //            scrollable: true,
+                    //            height: 'auto'
+
+                    //        },
+
+                    //        pageable: {
+                    //            refresh: true,
+                    //            input: true,
+                    //            numeric: true,
+                    //            pageSizes: true,
+                    //            buttonCount: 5
+                    //        },
+                    //        columns: columns
+                    //    };
+                    //    enableInput();
+                    //    grid = $("#grid").kendoGrid(configuration);
+                    //    //kendo.bind($('#example'), viewModel);
+                    //}
+                    //else if (result.rowCount > 0 && result.columnCount == 0) //Case When: Bricks > 0 , Teams = 0  => Display BrickCode,Brick only
+                    //{
+                    //    CreateGridDiv();
+                    //    var rows = [];
+                    //    var newArr = [];
+                    //    while (result.dataArray.length)
+                    //        newArr.push(result.dataArray.splice(0, result.columnCount));
+                    //    for (var i = 0; i < result.rowCount; i++) {
+                    //        entryArray = [];
+                    //        for (var j = 0; j < result.columnCount; j++) {
+                    //            entryArray.push(newArr[i][j]);
+
+                    //        }
+                    //        rows.push(kendo.observable({
+                    //            entries: entryArray
+                    //        }));
+                    //    }
+                    //    var viewModel = kendo.observable({
+                    //        gridRows: rows
+                    //    });
+                    //    var columns = [];
+                    //    columns.push({
+                    //        field: "entries[0]",
+                    //        title: "BrickCode",
+                    //        width: 150,
+                    //        //locked: true,
+                    //        headerAttributes: {
+                    //            "class": "table-header-cell",
+                    //            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                    //        }
+                    //    });
+                    //    columns.push({
+                    //        field: "entries[1]",
+                    //        title: "Brick",
+                    //        width: 150,
+                    //        //locked: true,
+                    //        headerAttributes: {
+                    //            "class": "table-header-cell",
+                    //            style: "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;"
+                    //        }
+                    //    });
+                    //    var configuration = {
+                    //        filterable: true,
+                    //        resizable: true,
+                    //        dataSource: { pageSize: 10 },
+                    //        sortable: true,
+                    //        groupable: true,
+                    //        columnMenu: true,
+
+                    //        dataBound: onDataBound,
+                    //        toolbar: kendo.template($("#exportToolbar").html()),
+                    //        scrollable: {
+                    //            scrollable: true,
+                    //            height: 'auto'
+
+                    //        },
+
+                    //        pageable: {
+                    //            refresh: true,
+                    //            input: true,
+                    //            numeric: true,
+                    //            pageSizes: true,
+                    //            buttonCount: 5
+                    //        },
+                    //        columns: columns
+                    //    };
+                    //    enableInput();
+                    //    grid = $("#grid").kendoGrid(configuration);
+                    //    kendo.bind($('#example'), viewModel);
+                    //}
+                    else 
+                    {
+                        enableInput();
+                        InitializeGrid();
+                    }
+
+
+                },
+                error: function (ex) {
+                    alert("error");
+                    enableInput();
+                    kendo.ui.progress($("#grid"), false);
+                }
+
+            });
+
+        }
+        function onDataBound(e) {
+            var grid = $('#grid').data('kendoGrid');
+            var requestObject = (new kendo.data.transports["aspnetmvc-server"]({ prefix: "" }))
+          .options.parameterMap({
+              page: grid.dataSource.page(),
+              sort: grid.dataSource.sort(),
+              filter: grid.dataSource.filter(),
+              take: grid.dataSource.take(),
+              countryID: $("#Country").val(),
+              fromPeriodID: $("#FromPeriods").val(),
+              toPeriodID: $("#ToPeriods").val()
+          });
+            //var gridElement = e.sender.wrapper;
+            //var dataArea = gridElement.children(".k-grid-content");
+            //var diff = dataArea[0].scrollHeight - dataArea[0].clientHeight+15;
+            //gridElement.height(gridElement.height() + diff);
+            //e.sender.resize();
+            $(".k-grid-content").css("height", "auto");
+            $("[dataexport='yes'],[data-export='yes']").each(function () {
+                // Get its 'href' attribute - the URL where it would navigate to
+                var href = $(this).attr('href');
+                // Update the 'page' parameter with the grid's current page
+                href = href.replace(/page=([^&]*)/, 'page=' + requestObject.page || '~');
+
+                // Update the 'sort' parameter with the grid's current sort descriptor
+                href = href.replace(/sort=([^&]*)/, 'sort=' + requestObject.sort || '~');
+
+                // Update the 'pageSize' parameter with the grid's current pageSize
+                href = href.replace(/pageSize=([^&]*)/, 'pageSize=' + grid.dataSource._pageSize);
+
+                //update filter descriptor with the filters applied
+                href = href.replace(/filter=([^&]*)/, 'filter=' + (requestObject.filter || '~'));
+
+                href = href.replace(/countryID=([^&]*)/, 'countryID=' + requestObject.countryID || '~');
+
+                href = href.replace(/fromPeriodID=([^&]*)/, 'fromPeriodID=' + requestObject.fromPeriodID || '~');
+
+                href = href.replace(/toPeriodID=([^&]*)/, 'toPeriodID=' + requestObject.toPeriodID || '~');
+                // Update the 'href' attribute
+                $(this).attr('href', href);
+
+            })
+        };
+        function getCountry() {
+            return {
+                countryID: $("#Country").val()
+
+            };
+        };
+        function disableInput()
+        {
+            $("#Country").data("kendoDropDownList").enable(false);
+
+            $("#FromPeriods").data("kendoDropDownList").enable(false);
+
+            $("#ToPeriods").data("kendoDropDownList").enable(false);
+        }
+        function enableInput() {
+           $("#Country").data("kendoDropDownList").enable(true);
+         
+           $("#FromPeriods").data("kendoDropDownList").enable(true);
+           
+           $("#ToPeriods").data("kendoDropDownList").enable(true);
+    
+        }
+        function disablePeriods()
+        {
+            this.enable(false);
+        }
+        function reloadPeriods()
+        {
+            if ($("#Country").val() != "")
+            {
+                $("#FromPeriods").data("kendoDropDownList").dataSource().read();
+                $("#FromPeriods").data("kendoDropDownList").refresh();
+                $("#ToPeriods").data("kendoDropDownList").dataSource().read();
+                $("#ToPeriods").data("kendoDropDownList").refresh();
+            }
+            
+
+        }
+        $("#kendoIconButton").click(function () {
+            //$("#kendoIconButton").blur();
+            reloadGrid();
+        });
+    </script>
+    <script type="text/x-kendo-template" id="exportToolbar">
+        <div class="toolbar">
+            <div>
+                <a class="k-button" data-export="yes" href="@Url.Action("ExportXls", "TerritoryToBrickByBrick", new { filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~", toPeriodID = "~" })"><span class='k-icon k-i-excel'></span> Export to Excel</a>
+                <a class="k-button" data-export="yes" href="@Url.Action("ExportPdf", "TerritoryToBrickByBrick", new { filter = "~", sort = "~", state = "~", countryID = "~", fromPeriodID = "~", toPeriodID = "~" })"><span class='k-icon k-i-pdf'></span> Export to PDF</a>
+
+            </div>
+        </div>
+    </script>
+
+}

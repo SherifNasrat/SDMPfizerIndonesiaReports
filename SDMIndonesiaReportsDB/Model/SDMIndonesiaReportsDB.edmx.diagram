@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="df8672713c024064abe598885cc8d003" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="SDW_TargetingModel.Country" Width="1.5" PointX="0.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.CountryPeriod" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.CustomerBranch" Width="1.5" PointX="18.5" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.CustomerGroup" Width="1.5" PointX="14.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.CustomerSector" Width="1.5" PointX="6" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.EmployeeLog" Width="1.5" PointX="8.5" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.EmployeeProfile" Width="1.5" PointX="11.5" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.EmployeeRecord" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.GeographicalArea" Width="1.5" PointX="7.5" PointY="32.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.Level" Width="1.5" PointX="10.5" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.Period" Width="1.5" PointX="6.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.Profile" Width="1.5" PointX="13.5" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.ProfileAdditionalAccount" Width="1.5" PointX="20.75" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.ProfileGeographicalArea" Width="1.5" PointX="15.75" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.SalesTeam" Width="1.5" PointX="10.5" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.SalesTeamType" Width="1.5" PointX="11.5" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SDW_TargetingModel.SystemUser" Width="1.5" PointX="4" PointY="29.5" IsExpanded="true" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Country_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Country_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CountryPeriod_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerSector_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeRecord_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_GeographicalArea_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Level_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Profile_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SalesTeamType_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CountryPeriod_Period" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_AdditionalAccount_CustomerBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerBranch_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerBranch_CustomerGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerBranch_FromPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerBranch_GeographicalArea" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerBranch_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerBranch_ToPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerGroup_CustomerSector" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerGroup_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_dbo_CustomerGroup_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerSector_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_CustomerSector_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeLog_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeLog_EmployeeRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeLog_FromPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeLog_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeLog_Level" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeLog_Supervisor" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeLog_ToPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeProfile_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeProfile_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeProfile_FromPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeProfile_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeProfile_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeProfile_ToPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeRecord_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmployeeRecord_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SystemUser_EmployeeRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_EmpGeographicalAreasResponsibilities_GeographicalArea" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_GeographicalArea_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_GeographicalArea_GeographicalArea" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_GeographicalArea_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Level_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Level_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_dbo_ProfileAdditionalAccount_FromPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_dbo_ProfileAdditionalAccount_ToPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_dbo_ProfileGeographicalAreas_FromPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_dbo_ProfileGeographicalAreas_ToPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Profile_FromPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Profile_ToPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_AdditionalAccount_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Profile_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Profile_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_Profile_SalesTeam" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_ProfileGeographicalAreas_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_ProfileAdditionalAccount_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_ProfileAdditionalAccount_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_ProfileAdditionalAccount_ProfileAdditionalAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_ProfileGeographicalAreas_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_ProfileGeographicalAreas_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SalesTeam_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SalesTeam_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SalesTeam_SalesTeamType" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SalesTeamType_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SalesTeamType_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_dbo_SystemUser_AddedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="SDW_TargetingModel.FK_SystemUser_LastModifiedBy" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

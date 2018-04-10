@@ -1,0 +1,68 @@
+﻿@model SDMIndonesiaReports.Models.CustomModels.SalesTeamVM
+@using System.Web.Mvc.Html;
+@using Kendo.Mvc.Extensions;
+@using Kendo.Mvc.UI;
+@{
+    string columnHeaderStyle = "background-color: #DDD; font-size: 14px; font-weight: 400; color: #666;   font-size: 14px; font-weight: 700; font-color: #555555; white-space: normal;";
+    var classDiv = (SDMIndonesiaReports.Shared.CultureHelper.IsRighToLeft()) ? "k-rtl" : "portlet-body";
+    var cc =(Model!=null&& Model.SalesTeamNames.Count() == 0 )? 0 : 5;
+}
+<div class="@classDiv">
+    @(Html.Kendo().Grid<SDMIndonesiaReports.Models.CustomModels.TerritoryToBrickByBrickVM>()
+                .Name("grid")
+                .ToolBar(tools =>
+                {
+                    tools.Excel();
+                    tools.Pdf();
+                })
+                    .Pdf(pdf => pdf
+                           .AllPages()
+                           .AvoidLinks()
+                           .Landscape()
+                           .PaperSize("A4")
+                           .Scale(0.8)
+                           .Margin("2cm", "1cm", "1cm", "1cm")
+                           .RepeatHeaders()
+                           .TemplateId("page-template")
+                                   .FileName("Territory To Brick By Brick.pdf"))
+                .Excel(excell => excell
+                    .AllPages(true)
+                    .Filterable(true)
+                            .FileName("Territory To Brick By Brick.xlsx"))
+
+                .Columns(columns =>
+                {
+                    columns.Bound(m => m.BrickCode).Title("BrickCode");
+                    columns.Bound(m => m.BrickName).Title("Brick");
+                })
+               .Pageable(pageable => { pageable.PageSizes(true); pageable.Input(true); pageable.Numeric(true); pageable.Refresh(true); })
+                .Sortable()
+                .Groupable()
+                .Filterable()
+                .Scrollable()
+                .Resizable(resize => resize.Columns(true))
+                .Reorderable(reorder => { reorder.Columns(true); })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Batch(true)
+                    .ServerOperation(false)
+
+                       //.Events(events =>
+                       //             {
+                       //                 // events.Change("onDataBound");
+                       //             })
+                    .PageSize(10)
+                    .Read(read => read.Action("TerritoryBrickByBrick_Read", "TerritoryToBrickByBrick").Data("getParameters"))))
+    
+</div>
+    <script type="text/javascript">
+        function getParameters() {
+
+            return {
+                countryID: 47,
+                fromPeriodID: 1,
+                toPeriodID: 200
+            };
+        };
+       
+</script>
